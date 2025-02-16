@@ -23,7 +23,7 @@ Instructions on how to install and set up your project.
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/yourproject.git
+git clone https://github.com/Aridoge13/Computational_Biology.git
 
 
 # Install dependencies
