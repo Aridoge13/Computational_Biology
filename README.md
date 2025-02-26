@@ -30,6 +30,10 @@ To access the programs, please open the folder named "src". Thank you.
     - Implements a simple Needleman-Wunsch or Smith-Waterman algorithm for pairwise sequence alignment.
     - Comparing scoring matrices like PAM and BLOSUM.
 
+- dna-protein.py for DNA to Protein translation
+    - Detects the codons in the DNA to predict the primary structure of the protein that is translated from the DNA sequence.
+    - Can give the result for 3 reading frames.
+
 ## Installation
 Instructions on how to install and set up your project.
 
