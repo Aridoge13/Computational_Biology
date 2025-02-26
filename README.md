@@ -1,22 +1,34 @@
 # Computational Biology Beginner Projects
 
 ## Description
-This project provides a set of Python scripts for analyzing nucleotide sequences, focusing on codon usage, GC content calculation, and sequence alignment. It is designed to assist in bioinformatics research and genomic data analysis.
+This project provides a set of Python scripts for analyzing nucleotide sequences, focusing on codon usage, GC content calculation, and sequence alignment. It is designed to assist in bioinformatics research and genomic, transcriptomic and proteomic data analysis.
+To access the programs, please open the folder named "src". Thank you. 
 
 ## Features
-- Feature codon_analysis.py for codon analysis
+- codon_analysis.py for codon analysis
     - Reads DNA sequences from a FASTA file.
     - Counts codon usage frequency.
     - Visualizes codon distribution using a bar chart.
 
-- Feature gc_calc_pwa.py for calculating GC content and global alignment of 2 or more nucleotide sequences
+- gc_calc_pwa.py for calculating GC content and global alignment of 2 or more nucleotide sequences
     - Computes GC content of multiple nucleotide sequences.
     - Performs global sequence alignment for two or more DNA sequences.
     - Provides visual representation of GC content distribution.
 
-- Feature gc_calc.py for calculating GC content of a single DNA sequence
+- gc_calc.py for calculating GC content of a single DNA sequence
     - Calculates the GC content of a single DNA sequence.
     - Outputs GC percentage for sequence analysis.
+
+- protein_seq_motif.py for detecting protein motifs in a given sequence
+    - Detects the site of the desired protein motif
+    - Detects the number of the desired protein motifs present in the protein sequence
+
+- rna_analysis.py for basic RNA-Seq Data Analysis
+    - Basic gene expression studies. 
+
+- seq_align_score_calc.py
+    - Implements a simple Needleman-Wunsch or Smith-Waterman algorithm for pairwise sequence alignment.
+    - Comparing scoring matrices like PAM and BLOSUM.
 
 ## Installation
 Instructions on how to install and set up your project.
