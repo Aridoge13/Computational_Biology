@@ -34,6 +34,13 @@ To access the programs, please open the folder named "src". Thank you.
     - Detects the codons in the DNA to predict the primary structure of the protein that is translated from the DNA sequence.
     - Can give the result for 3 reading frames.
 
+- promoter_id.py
+    - Extracts the promoter region (upstream sequence) of a gene.
+    - Analyzes GC content and possible promoter motifs (like the TATA box).
+
+- protein_property.py
+    - Computes molecular weight, isoelectric point (pI), and hydrophobicity for proteins.
+
 ## Installation
 Instructions on how to install and set up your project.
 
