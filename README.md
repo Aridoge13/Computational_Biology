@@ -41,6 +41,50 @@ To access the programs, please open the folder named "src". Thank you.
 - protein_property.py
     - Computes molecular weight, isoelectric point (pI), and hydrophobicity for proteins.
 
+- phylogenetic_analysis.py
+    - Build phylogenetic trees from multiple sequence alignments and analyze evolutionary relationships.
+    - Ensure the input FASTA file contains at least 4 sequences.
+    - The output directory (--output_dir) will be created automatically if it doesn't exist.
+    - How to use:
+        - Install Dependencies:
+        - Ensure the following tools are installed:
+            - MAFFT: sudo apt install mafft
+            - RAxML: sudo apt install raxml
+            - Biopython: pip install biopython
+        - Run the Script:
+        - Use the following command to run the pipeline:
+            - python phylogenetic_analysis.py --input <input_fasta> --alignment <output_alignment> --tree <tree_name> --output_dir <output_directory>
+        - Arguments:
+            - --input: Path to the input FASTA file containing sequences.
+            - --alignment: Path to save the aligned sequences (output from MAFFT).
+            - --tree: Name of the output tree file (without extension).
+            - --output_dir: Directory to save RAxML output files.
+        - Output:
+            - Alignment File: Saved to the path specified by --alignment.
+            - Phylogenetic Tree: Saved to <output_directory>/RAxML_bestTree.<tree_name>.
+            - Visualization: The phylogenetic tree is displayed using Biopython.
+
+- variant_calling.py
+    - Identify and annotate genetic variants (SNPs and indels) from a BAM file using a reference genome.
+    - The script assumes the BAM file is sorted and indexed. If not, use samtools sort and samtools index to prepare the BAM file.
+    - The reference genome FASTA file should be in standard FASTA format.
+        - How to use:
+            - Install Dependencies:
+            Ensure the following Python libraries are installed:
+            - pysam: pip install pysam
+            - Biopython: pip install biopython
+    - Run the Script:
+        - Use the following command to run the pipeline: python variant_calling.py --bam <input_bam> --ref <reference_fasta> --output <output_vcf>
+    - Arguments:
+        - --bam: Path to the input BAM file containing aligned reads.
+        - --ref: Path to the reference genome FASTA file.
+        - --output: Path to save the output VCF file containing called variants.
+
+    - Output:
+        - VCF File: Saved to the path specified by --output. Contains the called variants
+        - Annotations: Printed to the terminal, showing the variant position, reference allele, alternate allele, reference amino acid, alternate amino acid, and mutation type (synonymous, missense, or nonsense).
+
+
 ## Installation
 Instructions on how to install and set up your project.
 
