@@ -6,9 +6,22 @@ To access the programs, please open the folder named "src". Thank you.
 
 ## Features
 - codon_analysis.py for codon analysis
-    - Reads DNA sequences from a FASTA file.
-    - Counts codon usage frequency.
-    - Visualizes codon distribution using a bar chart.
+    - Analyze codon usage in DNA sequences from a FASTA file and visualize the results as a bar chart.
+    - The script reads sequences from a FASTA file, counts the occurrences of each codon, and generates a bar chart showing codon usage frequencies.
+    - How to use:
+        - Install dependencies:
+            - Ensure the following Python libraries are installed:
+                - Biopython: pip install biopython
+                - Matplotlib: pip install matplotlib
+
+        - Run the Script:
+            - Run the script and provide the path to the FASTA file when prompted:
+            python codon_analysis.py
+            - Input: When prompted, enter the path to the FASTA file containing DNA sequences.
+    
+    - Output:
+        - A bar chart displaying the frequency of each codon in the sequences.
+        - The chart is displayed using Matplotlib.
 
 - gc_calc_pwa.py for calculating GC content and global alignment of 2 or more nucleotide sequences
     - Computes GC content of multiple nucleotide sequences.
