@@ -9,15 +9,25 @@ From codon usage to variant annotation, these scripts are here to make your rese
 Here’s a quick tour of the scripts you’ll find in the src folder:
 
 1. codon_analysis.py: Count codons like a pro and visualize their usage. Because codons deserve to be counted too. 
+
 2. dna-protein.py: Translate DNA into protein sequences in all three reading frames. It’s like Google Translate, but for genomes. 
+
 3. gc_calc.py: Calculate GC content because someone has to keep track of all those Gs and Cs. 
+
 4. gc_calc_pwa.py: GC content + pairwise alignment = double the fun! 
+
 5. phylogenetic_analysis.py: Build phylogenetic trees and pretend you’re Darwin for a day. 
+
 6. promoter_id.py: Hunt for promoter motifs like TATA boxes and GC-rich regions. It’s a treasure hunt, but for DNA! 
+
 7. protein_property.py: Calculate molecular weight, pI, and hydrophobicity. Because proteins have feelings too. 
+
 8. protein_seq_motif.py: Find protein motifs and feel like a bioinformatics detective. 
+
 9. rna_analysis.py: Analyze RNA-Seq data and visualize differentially expressed genes. 
-10. seq_align_score_calc.py: Align sequences like a boss with Needleman-Wunsch and Smith-Waterman algorithms. 🧬⚔️
+
+10. seq_align_score_calc.py: Align sequences like a boss with Needleman-Wunsch and Smith-Waterman algorithms. 
+
 11. variant_annotation.py: Call and annotate variants like a genomic detective. 
 
 
