@@ -30,6 +30,10 @@ Here’s a quick tour of the scripts you’ll find in the src folder:
 
 11. variant_annotation.py: Call and annotate variants like a genomic detective. 
 
+12. metagenomic.py: Metagenomic analysis pipeline using Kraken and MetaPhlan.
+
+13. adhesion_metabolism_crosstalk.py: To identify shared pathways between desmosomal genes and metabolic regulators using the gseapy library.
+
 
 ## Why use these scripts? 
 
