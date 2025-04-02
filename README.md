@@ -1,60 +1,60 @@
 # Computational Biology Beginner Projects
 
 ## Description
-This project is your all-in-one toolkit for tackling the wild world of bioinformatics. Whether you're counting codons, translating DNA, aligning sequences, or hunting for promoter motifs, we've got a script for that. Think of it as your Swiss Army knife for genomic, transcriptomic, and proteomic data analysis—but with more Python and fewer pocket knives.
+This repository contains a collection of Python scripts for common computational biology and bioinformatics tasks. Designed for researchers and students, these tools facilitate genomic, transcriptomic, and proteomic data analysis with efficiency and reproducibility in mind.
 
-From codon usage to variant annotation, these scripts are here to make your research life easier, faster, and maybe even a little fun. So grab your lab coat, fire up your terminal, and let’s dive into the data!
-
-## What's Inside? 
-Here’s a quick tour of the scripts you’ll find in the src folder:
-
-1. codon_analysis.py: Count codons like a pro and visualize their usage. Because codons deserve to be counted too. 
-
-2. dna-protein.py: Translate DNA into protein sequences in all three reading frames. It’s like Google Translate, but for genomes. 
-
-3. gc_calc.py: Calculate GC content because someone has to keep track of all those Gs and Cs. 
-
-4. gc_calc_pwa.py: GC content + pairwise alignment = double the fun! 
-
-5. phylogenetic_analysis.py: Build phylogenetic trees and pretend you’re Darwin for a day. 
-
-6. promoter_id.py: Hunt for promoter motifs like TATA boxes and GC-rich regions. It’s a treasure hunt, but for DNA! 
-
-7. protein_property.py: Calculate molecular weight, pI, and hydrophobicity. Because proteins have feelings too. 
-
-8. protein_seq_motif.py: Find protein motifs and feel like a bioinformatics detective. 
-
-9. rna_analysis.py: Analyze RNA-Seq data and visualize differentially expressed genes. 
-
-10. seq_align_score_calc.py: Align sequences like a boss with Needleman-Wunsch and Smith-Waterman algorithms. 
-
-11. variant_annotation.py: Call and annotate variants like a genomic detective. 
-
-12. metagenomic.py: Metagenomic analysis pipeline using Kraken and MetaPhlan.
-
-13. adhesion_metabolism_crosstalk.py: To identify shared pathways between desmosomal genes and metabolic regulators using the gseapy library.
+## Project Features
+### Core Functionalities
+- DNA/RNA sequence analysis
+- Protein sequence characterization
+- Sequence alignment and comparison
+- Phylogenetic analysis
+- Variant annotation
+- Metagenomic analysis
 
 
-## Why use these scripts? 
+## Available Scripts
+1. codon_analysis.py: Codon usage analysis and visualization.
 
-- They’re fun: Who said bioinformatics had to be boring? 
-- They’re functional: From codon counting to tree building, these scripts have you covered. 
-- They’re free: Because science should be accessible (and I'm nice like that). 
+2. dna-protein.py: DNA to protein translation in all reading frames.
+
+3. gc_calc.py: GC content calculation.
+
+4. gc_calc_pwa.py: GC content with pairwise alignment.
+
+5. phylogenetic_analysis.py: Phylogenetic tree construction.
+
+6. promoter_id.py: Promoter motif identification.
+
+7. protein_property.py: Protein physicochemical property calculation.
+
+8. protein_seq_motif.py: Protein motif identification 
+
+9. rna_analysis.py: RNA-Seq data analysis and visualization
+
+10. seq_align_score_calc.py: Sequence alignment using Needleman-Wunsch/Smith-Waterman.
+
+11. variant_annotation.py: Variant calling and annotation
+
+12. metagenomic.py: Metagenomic analysis pipeline
+
+13. adhesion_metabolism_crosstalk.py: Pathway analysis between desmosomal genes and metabolic regulators
 
 
-## How to get started
-- Open the src folder.
-- Run the scripts and let the magic happen. 
-- Thank me later. (Or now, if you wish to. I'm not that picky.)
-
-
-## Disclaimer
-While these scripts are designed to make your life easier, they cannot (yet) make coffee, write your thesis, or explain why your PCR failed. Use responsibly. Have fun. 
+## Key Benefits
+- Efficiency: Streamlined analysis pipelines
+- Reproducibility: Consistent results across platforms
+- Educational: Well-documented code for learning
+- Extensible: Modular design for customization
 
 
 ## Installation
-Instructions on how to install and set up your project.
+### Requirements
+- Python 3.7+
+- Biopython
+- Common scientific Python stack (NumPy, Pandas, Matplotlib)
 
+### Setup
 ```bash
 # Clone the repository
 git clone https://github.com/Aridoge13/Computational_Biology.git
@@ -62,3 +62,10 @@ git clone https://github.com/Aridoge13/Computational_Biology.git
 
 # Install dependencies
 pip install biopython matplotlib pandas numpy pysam
+```
+
+## Contribution
+Contributions are welcome. Please submit issues or pull requests following the project guidelines.
+
+## Contact
+For questions or support, please contact: aritra.mukherjee98@gmail.com
