@@ -1,4 +1,5 @@
 # Computational Biology Beginner Projects
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 ## Description
 This repository contains a collection of Python scripts for common computational biology and bioinformatics tasks. Designed for researchers and students, these tools facilitate genomic, transcriptomic, and proteomic data analysis with efficiency and reproducibility in mind.
@@ -66,6 +67,9 @@ pip install biopython matplotlib pandas numpy pysam
 
 ## Contribution
 Contributions are welcome. Please submit issues or pull requests following the project guidelines.
+
+## License
+See [LICENSE](License.md) for full terms.
 
 ## Contact
 For questions or support, please contact: aritra.mukherjee98@gmail.com
