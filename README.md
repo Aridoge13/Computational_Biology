@@ -1,4 +1,4 @@
-# Computational Biology Beginner Projects
+# Computational Biology Repository
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 ## Description
@@ -41,6 +41,7 @@ This repository contains a collection of Python scripts for common computational
 
 13. adhesion_metabolism_crosstalk.py: Pathway analysis between desmosomal genes and metabolic regulators
 
+14. somatic_variation.py: Detecting somatic variation in cancer cells compared to healthy cells
 
 ## Key Benefits
 - Efficiency: Streamlined analysis pipelines
