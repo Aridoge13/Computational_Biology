@@ -36,16 +36,6 @@ graph TD
   F --> G[Functional Enrichment / Pathway Mapping]
   E --> G
   G --> H[Final Outputs & Visualization]
-
-%% Color definitions
-    Style A fill:#f57c00,stroke:#e65100,color:#ffffff
-    Style B fill:#ffa000,stroke:#ff6f00,color:#ffffff
-    Style C fill:#388e3c,stroke:#1b5e20,color:#ffffff
-    Style D fill:#388e3c,stroke:#1b5e20,color:#ffffff
-    Style E fill:#7b1fa2,stroke:#4a148c,color:#ffffff
-    Style F fill:#7b1fa2,stroke:#4a148c,color:#ffffff
-    Style G fill:#1976d2,stroke:#0d47a1,color:#ffffff
-    Style H fill:#d32f2f,stroke:#b71c1c,color:#ffffff
 ```
 
 ---
