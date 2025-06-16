@@ -5,12 +5,27 @@
 ![GitHub last commit](https://img.shields.io/github/last-commit/Aridoge13/Computational_Biology)
 
 ## 📘 Description
-This repository provides a curated collection of Python-based tools for common tasks in **computational biology and regulatory genomics**, designed for researchers analyzing genomic, transcriptomic, and evolutionary data. The scripts are modular, well-documented, and suited for mutation analysis, sequence evolution studies, and motif detection — with direct relevance to investigating the origins and dynamics of regulatory RNA elements.
+This repository provides a curated set of Python-based tools for key tasks in computational biology, with a focus on genomics, transcriptomics, and evolutionary analysis. The scripts are modular, well-documented, and easily extendable for applications in:
 
-Originally built to support graduate-level research in genomics and machine learning, this toolkit can be used for both educational and research applications involving **mutation clusters, RNA gene emergence**, and **comparative genomics**.
+- Variant annotation
+- Sequence comparison
+- RNA-seq data analysis
+- Phylogenetics
+- Regulatory element detection
+- Metagenomic profiling
+
+Originally developed to support graduate-level research, this toolkit is suitable for researchers and students working across diverse biological datasets — from mammalian genomes to microbial communities.
 
 ---
 
+## 🌟 Highlights
+
+- Supports standard file formats (FASTA, VCF, GTF, etc.)
+- Minimal dependencies and lightweight structure
+- Suitable for both exploration and automation
+- Great for teaching and rapid prototyping of pipelines
+
+---
 ## 🧪 Project Features
 ### Core Functionalities
 
@@ -54,7 +69,7 @@ graph TD
 
 | Script | Description | Use Case |
 |--------|-------------|----------|
-| `codon_analysis.py` | Codon usage analysis and visualization | Compare codon bias across orthologs |
+| `codon_analysis.py` | Codon usage analysis and visualization | Compare codon bias across genes or species |
 | `dna-protein.py` | DNA to protein translation in 6 frames | Identify potential ORFs and misannotations |
 | `gc_calc.py` | GC content calculation | Assess genomic stability or mutation hotspots |
 | `gc_calc_pwa.py` | GC content with pairwise alignment | Compare GC distribution between homologs |
@@ -73,9 +88,9 @@ graph TD
 
 ## 🚀 Use Case Example
 
-> *"Annotate clustered mutations near a candidate miRNA gene locus and evaluate codon usage shifts or GC-content anomalies to assess evolutionary origin."*
+> *Process a FASTA file of variant-rich loci, score GC content and codon usage, and run downstream motif analysis to assess regulatory potential.*
 
-This repo can support mutation clustering analysis, phylogenetic comparison, and regulatory region profiling in TSM-related RNA loci or other de novo gene candidates.
+This toolkit can be used to generate publication-ready insights from raw sequence data — whether you’re exploring de novo genes, transcript isoforms, or somatic variant landscapes.
 
 ---
 ## Key Benefits
@@ -105,7 +120,7 @@ pip install biopython matplotlib pandas numpy pysam
 ---
 
 ## 🤝 Contribution
-Contributions and forks are welcome! Please submit issues or pull requests if you'd like to suggest improvements or expand functionality.
+Feedback, forks, and pull requests are welcome! Feel free to open issues or share feature ideas.
 
 ---
 
