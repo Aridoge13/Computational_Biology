@@ -157,6 +157,14 @@ This conservation genomics extension transforms raw genomic data into conservati
 - Educational: Well-documented code for learning
 - Extensible: Modular design for customization
 
+
+### Key Benefits for Conservation/Evolutionary Genomics Research
+- **Methodological Rigor:** Implements state-of-the-art conservation genomics methods.
+- **Scalability:** From lightweight demonstrations to HPC-scale production.
+- **Interoperability:** Works with standard tools (Sniffles2, Minigraph, VCFtools).
+- **Actionable Outputs:** Generates conservation-relevant reports and prioritizations.
+- **Educational Value:** Well-documented code suitable for teaching and collaboration.
+
 ---
 
 ## ⚙️ Installation
@@ -173,7 +181,14 @@ git clone https://github.com/Aridoge13/Computational_Biology.git
 
 
 # Install dependencies
-pip install biopython matplotlib pandas numpy pysam
+pip install biopython matplotlib seaborn pandas numpy pysam sniffles
+```
+
+To run the pangenome assembly script you would need to install minigraph
+```bash
+# Clone the repository which contains the minigraph module
+git clone https://github.com/lh3/minigraph
+cd minigraph && make
 ```
 ---
 
@@ -191,3 +206,5 @@ See [LICENSE](License.md) for full terms.
 Email: aritra.mukherjee98@gmail.com
 Linkedin: [Aritra_Mukherjee](www.linkedin.com/in/aritra-mukherjee-82b070125)
 ORCID:[Aritra_Mukherjee](https://orcid.org/0000-0002-6061-611X)
+
+Currently seeking PhD positions in conservation genomics and evolutionary biology

@@ -2,7 +2,7 @@ import pandas as pd
 from pathlib import Path
 import seaborn as sns
 import matplotlib.pyplot as plt
-import numpy as np
+
 
 # --- 1. Genetic Load Calculation Function ---
 
