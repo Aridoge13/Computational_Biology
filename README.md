@@ -1,4 +1,4 @@
-# 🧬 Computational Biology Toolkit
+# 🧬 Computational Biology Toolkit for Evolutionary and Conservation Genomics
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 ![Python](https://img.shields.io/badge/python-3.7%2B-blue)
 ![GitHub issues](https://img.shields.io/github/issues/Aridoge13/Computational_Biology)
