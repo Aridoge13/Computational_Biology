@@ -5,16 +5,14 @@
 ![GitHub last commit](https://img.shields.io/github/last-commit/Aridoge13/Computational_Biology)
 
 ## 📘 Description
-This repository provides a curated set of Python-based tools for key tasks in computational biology, with a focus on genomics, transcriptomics, and evolutionary analysis. The scripts are modular, well-documented, and easily extendable for applications in:
+A comprehensive collection of Python tools for computational biology, with specialized modules for **conservation genomics** and **evolutionary analysis**. This toolkit bridges traditional bioinformatics with cutting-edge conservation applications, featuring:
 
-- Variant annotation
-- Sequence comparison
-- RNA-seq data analysis
-- Phylogenetics
-- Regulatory element detection
-- Metagenomic profiling
+- **Conservation Genomics**: Structural variant calling, harmful alleles scoring, pangenome analysis.
+- **Evolutionary Analysis**: Phylogenetics, population genetics, lineage assessment.  
+- **Genomic Workflows**: Variant annotation, sequence analysis, transcriptomics.
+- **Multi-omics Integration**: Metagenomics, regulatory genomics, pathway analysis.
 
-Originally developed to support graduate-level research, this toolkit is suitable for researchers and students working across diverse biological datasets — from mammalian genomes to microbial communities.
+Originally developed to support graduate-level research, this toolkit is suitable for researchers and students working across diverse biological datasets — from large mammalian genomes to microbial communities.
 
 ---
 
@@ -23,20 +21,69 @@ Originally developed to support graduate-level research, this toolkit is suitabl
 - Supports standard file formats (FASTA, VCF, GTF, etc.)
 - Minimal dependencies and lightweight structure
 - Suitable for both exploration and automation
-- Great for teaching and rapid prototyping of pipelines
+- Great for teaching and rapid prototyping of pipelines 
+- **Conservation-Focused**: Specialized tools for endangered species genomics
+- **Production-Ready**: Includes real tool commands (Sniffles2, Minigraph, CADD)
+- **Modular Design**: Use individually or in integrated workflows
+- **Resource-Efficient**: Lightweight implementations suitable for diverse computing environments
+- **Reproducible**: Well-documented with version control and environment management
+
 
 ---
 ## 🧪 Project Features
 ### Core Functionalities
 
-- **DNA/RNA sequence analysis**: Translate, compare, and characterize raw nucleotide sequences  
-- **Regulatory motif detection**: Identify promoter motifs or codon usage patterns  
-- **Phylogenetic modeling**: Construct and analyze evolutionary trees  
-- **Mutation & variant annotation**: Detect and annotate clustered or somatic mutations  
-- **RNA-seq data processing**: Visualize expression and functional divergence  
-- **Metagenomic analysis**: Profile community-wide diversity and function  
+#### **Conservation Genomics**
+- Structural variant calling and annotation
+- Deleterious alleles scoring and genetic load estimation
+- Pangenome graph construction and analysis
+- Lineage divergence and hybridization assessment
+
+#### **Evolutionary & Population Genetics**
+- Phylogenetic tree construction and analysis
+- Population structure inference
+- Selection pressure analysis
+- Demographic history modeling
+
+#### **Genomic Analysis**
+- Variant annotation and prioritization
+- Sequence alignment and comparison
+- Regulatory element detection
+- Metagenomic profiling
+
+#### **Transcriptomics**
+- RNA-seq differential expression
+- Expression visualization and clustering
+- Functional enrichment analysis
+
 
 ---
+
+### **Conservation Genomics Workflow**
+> Specialized pipeline for endangered species genomics:
+
+```mermaid
+graph TD
+    A[Long-read Sequencing<br/>PacBio/Nanopore] --> B[Sniffles2 SV Calling]
+    B --> C[Pangenome Construction<br/>Minigraph]
+    C --> D[Harmful Alleles Scoring<br/>CADD/SIFT/PolyPhen]
+    D --> E[Genetic Load Estimation]
+    E --> F[Conservation Decisions<br/>Hybridization Risk]
+    
+    G[Population Samples] --> H[Lineage Assignment]
+    H --> I[Evolutionary Divergence]
+    I --> F
+    
+    style A fill:#f57c00,stroke:#e65100,color:#ffffff
+    style B fill:#388e3c,stroke:#1b5e20,color:#ffffff
+    style C fill:#1976d2,stroke:#0d47a1,color:#ffffff
+    style D fill:#7b1fa2,stroke:#4a148c,color:#ffffff
+    style E fill:#d32f2f,stroke:#b71c1c,color:#ffffff
+    style F fill:#689f38,stroke:#33691e,color:#ffffff
+    style G fill:#0097a7,stroke:#006064,color:#ffffff
+    style H fill:#ffa000,stroke:#ff6f00,color:#ffffff
+    style I fill:#5d4037,stroke:#3e2723,color:#ffffff 
+```
 
 ### Workflow Overview
 > The tools in this repository are designed to be modular, but can also be used in sequence as part of a complete analysis workflow. Below is an example of how these components may integrate in a mutation- or expression-driven research pipeline:
@@ -84,6 +131,13 @@ graph TD
 | `adhesion_metabolism_crosstalk.py` | Pathway-level interaction mapping | Explore crosstalk between signaling modules |
 | `somatic_variation.py` | Compare cancer vs healthy genomes | Detect somatic mutations or LOH regions |
 
+
+### **New Conservation Modules**
+| Module | Description | Application |
+|--------|-------------|-------------|
+| **`conservation/sv_annotation.py`** | Sniffles2-based structural variant calling with conservation annotation | Asian elephant genomic compatibility |
+| **`conservation/genetic_load.py`** | CADD/SIFT/PolyPhen-style deleterious variant scoring | Genetic load estimation for endangered species |
+| **`conservation/pangenome_assembly.py`** | Pangenome graph construction and analysis | Lineage-specific variation detection |
 ---
 
 ## 🚀 Use Case Example
@@ -91,6 +145,10 @@ graph TD
 > *Process a FASTA file of variant-rich loci, score GC content and codon usage, and run downstream motif analysis to assess regulatory potential.*
 
 This toolkit can be used to generate publication-ready insights from raw sequence data — whether you’re exploring de novo genes, transcript isoforms, or somatic variant landscapes.
+
+> *Call structural variants from long-read mammalian genomes, construct lineage-aware pangenome graphs, and score harmful alleles to assess hybridization risk and genetic rescue potential.*
+
+This conservation genomics extension transforms raw genomic data into conservation-ready insights—from pangenome graphs of endangered populations to genetic load estimates for managed breeding decisions.
 
 ---
 ## Key Benefits
