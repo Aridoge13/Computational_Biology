@@ -117,7 +117,7 @@ def main():
     
     # Parse and annotate
     sv_df = parse_sniffles_vcf(vcf_file)
-    print(f"✓ Found {len(sv_df)} SVs")
+    print(f"Found {len(sv_df)} SVs")
     annotate_svs(sv_df, gff_file=args.gff_file, output_file=args.annotated_output)
 
 if __name__ == "__main__":
