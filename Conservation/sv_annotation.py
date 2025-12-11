@@ -18,10 +18,10 @@ def call_svs_with_sniffles(bam_file, vcf_output="svs.vcf", threads=4):
     
     try:
         subprocess.run(cmd, check=True, capture_output=True, text=True)
-        print(f"✓ Sniffles completed! VCF saved to {vcf_output}")
+        print(f" Sniffles completed! VCF saved to {vcf_output}")
         return vcf_output
     except FileNotFoundError:
-        print("✗ Sniffles not found. Install with: pip install sniffles")
+        print(" Sniffles not found. Install with: pip install sniffles")
         raise
 
 def parse_sniffles_vcf(vcf_file):
@@ -61,9 +61,9 @@ def annotate_svs(sv_df, gff_file=None, output_file="annotated_svs.tsv"):
                 if row['TYPE'] == 'gene':
                     key = (row['CHROM'], row['START'], row['END'])
                     gene_regions[key] = row['ATTRIBUTES']
-            print(f"✓ Loaded {len(gene_regions)} genes from GFF")
+            print(f"Loaded {len(gene_regions)} genes from GFF")
         except Exception as e:
-            print(f"⚠ Warning: Could not parse GFF file: {e}")
+            print(f"Warning: Could not parse GFF file: {e}")
     
     annotations = []
     for sv_idx, row in sv_df.iterrows():
