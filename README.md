@@ -204,7 +204,7 @@ See [LICENSE](License.md) for full terms.
 
 ## 📫 Contact
 Email: aritra.mukherjee98@gmail.com
-Linkedin: [Aritra_Mukherjee](www.linkedin.com/in/aritra-mukherjee-82b070125)
-ORCID:[Aritra_Mukherjee](https://orcid.org/0000-0002-6061-611X)
+Linkedin: www.linkedin.com/in/aritra-mukherjee-82b070125
+ORCID: https://orcid.org/0000-0002-6061-611X
 
 Currently seeking PhD positions in conservation genomics and evolutionary biology
