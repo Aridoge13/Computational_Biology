@@ -118,3 +118,26 @@ git clone https://github.com/Aridoge13/Computational_Biology.git
 cd Computational_Biology
 
 pip install biopython matplotlib seaborn pandas numpy pysam
+```
+
+### Optional Tools for Specific Modules
+```bash
+#structural variant analysis
+pip install sniffles
+
+# Pangenome Construction
+git clone https://github.com/lh3/minigraph
+cd minigraph && make
+```
+
+## Design Principles
+- Modularity: Components can be reused in custom workflows
+- Reproducibility: Deterministic outputs with documented dependencies
+- Clarity: Readable implementations suitable for learning and extension
+- Scalability: Applicable from small datasets to HPC environments
+
+## Contribution
+Issues, feature requests, and pull requests are welcome.
+
+## License
+Distributed under the [MIT License](License.md)
