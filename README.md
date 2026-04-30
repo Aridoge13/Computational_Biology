@@ -44,6 +44,7 @@ The repository integrates core bioinformatics tasks — from sequence processing
 - RNA-seq differential expression workflows
 - Expression visualization and clustering
 - Functional enrichment and pathway analysis
+- scRNA-seq data analysis
 
 ### 🌐 Metagenomics & Multi-omics
 - Taxonomic and functional profiling
@@ -89,6 +90,7 @@ graph TD
 | `metagenomic.py` | Metagenomic profiling |
 | `adhesion_metabolism_crosstalk.py` | Pathway interaction analysis |
 | `somatic_variation.py` | Comparative genome analysis |
+| `scrna.ipynb` | Single-cell RNA seq data analysis |
 
 ---
 
@@ -117,8 +119,9 @@ graph TD
 git clone https://github.com/Aridoge13/Computational_Biology.git
 cd Computational_Biology
 
-pip install biopython matplotlib seaborn pandas numpy pysam
+pip install biopython matplotlib seaborn pandas numpy pysam 'scanpy[leiden]'
 ```
+> the extra [leiden] installs two packages that are needed for popular parts of scanpy but aren’t requirements: `igraph` [Csárdi and Nepusz, 2006] and `leiden` [Traag et al., 2019]
 
 ### Optional Tools for Specific Modules
 ```bash
