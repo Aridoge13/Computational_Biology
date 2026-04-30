@@ -70,6 +70,15 @@ graph TD
   E --> G[Integration & Interpretation]
   F --> G
   G --> H[Visualization & Reporting]
+%% Color definitions
+  style A fill:#d32f2f,stroke:#b71c1c,color:#ffffff
+  style B fill:#f57c00,stroke:#ff6f00,color:#ffffff
+  style C fill:#f57c00,stroke:#1b5e20,color:#ffffff
+  style D fill:#f57c00,stroke:#e65100,color:#ffffff
+  style E fill:#ffa000,stroke:#b71c1c,color:#ffffff
+  style F fill:#ffa000,stroke:#ff6f00,color:#ffffff
+  style G fill:#ffa000,stroke:#1b5e20,color:#ffffff
+  style H fill:#ffa000,stroke:#e65100,color:#ffffff
 ```
 
 ## 📂 Available Scripts
