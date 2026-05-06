@@ -66,6 +66,7 @@ graph TD
   B --> E[Regulatory analysis <br>GRN, PANDA, LIONESS, scRNA</br>]
   D --> F[Phylogenetic Analysis <br>Tree, Population </br>]
   C --> G[Integration & Interpretation <br>Multi-omics, pathway enrichment</br>]
+  D --> G
   E --> G
   F --> G
   G --> H[Visualization & Reporting <br>Figures, Notebooks, GitHub</br>]
