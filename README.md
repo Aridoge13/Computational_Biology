@@ -7,11 +7,9 @@
 
 ## 📘 Overview
 
-A modular collection of Python tools for genome-scale analysis, population genetics, and sequence-based inference.  
-Designed for flexibility, clarity, and reproducibility, this toolkit supports exploratory research, teaching, and lightweight pipeline development across diverse biological systems.
+This repository documents a self-directed programme of computational biology work developed independently alongside formal academic training in Genomic Science. It is organised as a modular collection of Python tools and analytical notebooks spanning population genomics, cancer genomics, regulatory network inference, transcriptomics, and metagenomics. 
 
-The repository integrates core bioinformatics tasks — from sequence processing and variant interpretation to phylogenetic, transcriptomic, and metagenomic analysis — and is applicable to both model and non-model organisms.
-
+The work reflects a deliberate progression toward systems-level approaches to understanding disease heterogeneity — from foundational sequence analysis and variant annotation through to single-cell RNA-seq workflows and patient-specific gene regulatory network inference using PANDA and LIONESS on TCGA ovarian cancer data. Tools are designed for reproducibility and modularity, and are compatible with HPC and cloud environments including GCP.
 ---
 
 ## 🌟 Key Features
@@ -62,14 +60,15 @@ Tools can operate independently or as components of a complete analysis pipeline
 
 ```mermaid
 graph TD
-  A[Raw Sequence Data] --> B[Preprocessing & QC]
-  B --> C[Sequence-Level Analysis]
-  B --> D[Variant Detection & Annotation]
-  D --> E[Phylogenetic / Population Analysis]
-  D --> F[Regulatory & Functional Analysis]
-  E --> G[Integration & Interpretation]
+  A[Raw Sequence Data <br>Fasta, VCF, BAM, GTF</br>] --> B[Preprocessing & QC <br>Trimming, Normalisation, Filtering</br>]
+  B --> C[Sequence-Level Analysis <br>GC, codon, alignment, </br>]
+  B --> D[Variant Detection & Annotation <br>CADD</br>]
+  B --> E[Regulatory analysis <br>GRN, PANDA, LIONESS, scRNA</br>]
+  D --> F[Phylogenetic Analysis <br>Tree, Population </br>]
+  C--> G[Integration & Interpretation <br>Multi-omics, pathway enrichment</br>]
+  E --> G
   F --> G
-  G --> H[Visualization & Reporting]
+  G --> H[Visualization & Reporting <br>Figures, Notebooks, GitHub</br>]
 %% Color definitions
   style A fill:#d32f2f,stroke:#b71c1c,color:#ffffff
   style B fill:#f57c00,stroke:#ff6f00,color:#ffffff
@@ -83,24 +82,26 @@ graph TD
 
 ## 📂 Available Scripts
 
-| Script | Function |
-|--------|----------|
-| `codon_analysis.py` | Codon usage analysis |
-| `dna-protein.py` | Six-frame DNA translation |
-| `gc_calc.py` | GC content profiling |
-| `gc_calc_pwa.py` | Comparative GC analysis |
-| `phylogenetic_analysis.py` | Distance-based tree construction |
-| `promoter_id.py` | Promoter/motif scanning |
-| `protein_property.py` | Amino acid property analysis |
-| `protein_seq_motif.py` | Protein motif detection |
-| `rna_analysis.py` | RNA-seq processing and visualization |
-| `seq_align_score_calc.py` | Alignment scoring (Needleman–Wunsch / Smith–Waterman) |
-| `variant_annotation.py` | Variant functional annotation |
-| `metagenomic.py` | Metagenomic profiling |
-| `adhesion_metabolism_crosstalk.py` | Pathway interaction analysis |
-| `somatic_variation.py` | Comparative genome analysis |
-| `scrna.ipynb` | Single-cell RNA seq data analysis |
-
+| Script | Function | Current Status |
+|--------|----------|----------------|
+| `codon_analysis.py` | Codon usage analysis | Completed|
+| `dna-protein.py` | Six-frame DNA translation | Completed|
+| `gc_calc.py` | GC content profiling | Completed|
+| `gc_calc_pwa.py` | Comparative GC analysis | Completed |
+| `phylogenetic_analysis.py` | Distance-based tree construction | Completed |
+| `promoter_id.py` | Promoter/motif scanning | Completed |
+| `protein_property.py` | Amino acid property analysis | Completed |
+| `protein_seq_motif.py` | Protein motif detection | Completed |
+| `rna_analysis.py` | RNA-seq processing and visualization | Completed |
+| `seq_align_score_calc.py` | Alignment scoring (Needleman–Wunsch / Smith–Waterman) | Completed |
+| `variant_annotation.py` | Variant functional annotation | Completed |
+| `metagenomic.py` | Metagenomic profiling | Completed |
+|`mutation_annotation.py`| Annotation of mutations | Completed |
+| `adhesion_metabolism_crosstalk.py` | Pathway interaction analysis | Completed |
+| `somatic_variation.py` | Comparative genome analysis | Completed |
+| `scrna.ipynb` | Single-cell RNA seq data analysis | Completed |
+|`panda_lioness.ipynb`|Gene Regulatory Network analysis| Currently being run on the GCP platform.|
+|`ampml.ipynb`|Multi-label classification of antimicrobial proteins| Active Development |
 ---
 
 ## 🧪 Example Use Cases
@@ -130,12 +131,15 @@ cd Computational_Biology
 
 pip install biopython matplotlib seaborn pandas numpy pysam 'scanpy[leiden]'
 ```
-> the extra [leiden] installs two packages that are needed for popular parts of scanpy but aren’t requirements: `igraph` [Csárdi and Nepusz, 2006] and `leiden` [Traag et al., 2019]
+#the extra [leiden] installs two packages that are needed for popular parts of scanpy but aren’t requirements: `igraph` [Csárdi and Nepusz, 2006] and `leiden` [Traag et al., 2019]
 
-### Optional Tools for Specific Modules
+### Tools for Specific Modules
 ```bash
 #structural variant analysis
 pip install sniffles
+
+#Gene Regulatory Network Analysis
+pip install netzoopy pyarrow
 
 # Pangenome Construction
 git clone https://github.com/lh3/minigraph
