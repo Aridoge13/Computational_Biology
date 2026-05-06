@@ -60,25 +60,26 @@ Tools can operate independently or as components of a complete analysis pipeline
 
 ```mermaid
 graph TD
-  A[Raw Sequence Data <br>(Fasta, VCF, BAM, GTF)</br>] --> B[Preprocessing & QC <br>(Trimming, Normalisation, Filtering)</br>]
-  B --> C[Sequence-Level Analysis <br>(GC, codon, alignment)</br>]
-  B --> D[Variant Detection & Annotation <br>(CADD)</br>]
-  B --> E[Regulatory analysis <br>(GRN, PANDA, LIONESS, scRNA)</br>]
-  D --> F[Phylogenetic Analysis <br>(Tree, Population)</br>]
-  C --> G[Integration & Interpretation <br>(Multi-omics, pathway enrichment)</br>]
+  A["Raw Sequence Data<br>File Formats: Fasta, VCF, BAM, GTF"] --> B["Preprocessing & QC<br>Trimming, Normalisation, Filtering"]
+  B --> C["Sequence-Level Analysis<br>GC, codon, alignment"]
+  B --> D["Variant Detection & Annotation<br>CADD"]
+  B --> E["Regulatory Analysis<br>GRN, PANDA, LIONESS, scRNA"]
+  D --> F["Phylogenetic Analysis<br>Tree, Population"]
+  C --> G["Integration & Interpretation<br>Multi-omics, pathway enrichment"]
   D --> G
   E --> G
   F --> G
-  G --> H[Visualization & Reporting <br>(Figures, Notebooks, GitHub)</br>]
-%% Color definitions
-  style A fill:#d32f2f,stroke:#b71c1c,color:#ffffff
-  style B fill:#f57c00,stroke:#ff6f00,color:#ffffff
-  style C fill:#f57c00,stroke:#1b5e20,color:#ffffff
-  style D fill:#f57c00,stroke:#e65100,color:#ffffff
-  style E fill:#ffa000,stroke:#b71c1c,color:#ffffff
-  style F fill:#ffa000,stroke:#ff6f00,color:#ffffff
-  style G fill:#ffa000,stroke:#1b5e20,color:#ffffff
-  style H fill:#ffa000,stroke:#e65100,color:#ffffff
+  G --> H["Visualization & Reporting<br>Figures, Notebooks, GitHub"]
+
+  %% Color definitions
+  style A fill:#d32f2f,stroke:#b71c1c,color:#fff
+  style B fill:#f57c00,stroke:#ff6f00,color:#fff
+  style C fill:#f57c00,stroke:#1b5e20,color:#fff
+  style D fill:#f57c00,stroke:#e65100,color:#fff
+  style E fill:#ffa000,stroke:#b71c1c,color:#fff
+  style F fill:#ffa000,stroke:#ff6f00,color:#fff
+  style G fill:#ffa000,stroke:#1b5e20,color:#fff
+  style H fill:#ffa000,stroke:#e65100,color:#fff
 ```
 
 ## 📂 Available Scripts
