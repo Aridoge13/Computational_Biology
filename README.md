@@ -60,16 +60,16 @@ Tools can operate independently or as components of a complete analysis pipeline
 
 ```mermaid
 graph TD
-  A[Raw Sequence Data <br>Fasta, VCF, BAM, GTF</br>] --> B[Preprocessing & QC <br>Trimming, Normalisation, Filtering</br>]
-  B --> C[Sequence-Level Analysis <br>GC, codon, alignment, </br>]
-  B --> D[Variant Detection & Annotation <br>CADD</br>]
-  B --> E[Regulatory analysis <br>GRN, PANDA, LIONESS, scRNA</br>]
-  D --> F[Phylogenetic Analysis <br>Tree, Population </br>]
-  C --> G[Integration & Interpretation <br>Multi-omics, pathway enrichment</br>]
+  A[Raw Sequence Data <br>(Fasta, VCF, BAM, GTF)</br>] --> B[Preprocessing & QC <br>(Trimming, Normalisation, Filtering)</br>]
+  B --> C[Sequence-Level Analysis <br>(GC, codon, alignment)</br>]
+  B --> D[Variant Detection & Annotation <br>(CADD)</br>]
+  B --> E[Regulatory analysis <br>(GRN, PANDA, LIONESS, scRNA)</br>]
+  D --> F[Phylogenetic Analysis <br>(Tree, Population)</br>]
+  C --> G[Integration & Interpretation <br>(Multi-omics, pathway enrichment)</br>]
   D --> G
   E --> G
   F --> G
-  G --> H[Visualization & Reporting <br>Figures, Notebooks, GitHub</br>]
+  G --> H[Visualization & Reporting <br>(Figures, Notebooks, GitHub)</br>]
 %% Color definitions
   style A fill:#d32f2f,stroke:#b71c1c,color:#ffffff
   style B fill:#f57c00,stroke:#ff6f00,color:#ffffff
