@@ -65,7 +65,7 @@ graph TD
   B --> D[Variant Detection & Annotation <br>CADD</br>]
   B --> E[Regulatory analysis <br>GRN, PANDA, LIONESS, scRNA</br>]
   D --> F[Phylogenetic Analysis <br>Tree, Population </br>]
-  C--> G[Integration & Interpretation <br>Multi-omics, pathway enrichment</br>]
+  C --> G[Integration & Interpretation <br>Multi-omics, pathway enrichment</br>]
   E --> G
   F --> G
   G --> H[Visualization & Reporting <br>Figures, Notebooks, GitHub</br>]
