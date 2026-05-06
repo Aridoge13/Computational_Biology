@@ -72,14 +72,14 @@ graph TD
   G --> H["Visualization & Reporting<br>Figures, Notebooks, GitHub"]
 
   %% Class definitions with contrasting blue/green tones
-  classDef start fill:#1e88e5,stroke:#0d47a1,color:#fff        <!-- blue -->
-  classDef preproc fill:#43a047,stroke:#1b5e20,color:#fff      <!-- green -->
-  classDef seq fill:#66bb6a,stroke:#2e7d32,color:#fff          <!-- light green -->
-  classDef variant fill:#ffb300,stroke:#ff8f00,color:#000      <!-- amber (contrast) -->
-  classDef reg fill:#8d6e63,stroke:#4e342e,color:#fff          <!-- brown (neutral) -->
-  classDef phylo fill:#26a69a,stroke:#00695c,color:#fff        <!-- teal -->
-  classDef integrate fill:#5c6bc0,stroke:#283593,color:#fff    <!-- indigo -->
-  classDef report fill:#ec407a,stroke:#ad1457,color:#fff       <!-- pink/magenta -->
+  classDef start fill:#1e88e5,stroke:#0d47a1,color:#fff        
+  classDef preproc fill:#43a047,stroke:#1b5e20,color:#fff      
+  classDef seq fill:#66bb6a,stroke:#2e7d32,color:#fff          
+  classDef variant fill:#ffb300,stroke:#ff8f00,color:#000      
+  classDef reg fill:#8d6e63,stroke:#4e342e,color:#fff          
+  classDef phylo fill:#26a69a,stroke:#00695c,color:#fff        
+  classDef integrate fill:#5c6bc0,stroke:#283593,color:#fff    
+  classDef report fill:#ec407a,stroke:#ad1457,color:#fff      
 
   %% Apply classes to nodes
   class A start
