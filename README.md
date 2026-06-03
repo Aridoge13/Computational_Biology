@@ -60,37 +60,81 @@ Tools can operate independently or as components of a complete analysis pipeline
 
 ```mermaid
 graph TD
-  A["Raw Sequence Data<br>File Formats: Fasta, VCF, BAM, GTF"] --> B["Preprocessing & QC<br>Trimming, Normalisation, Filtering"]
-  B --> C["Sequence-Level Analysis<br>GC, codon, alignment"]
-  B --> D["Variant Detection & Annotation<br>CADD"]
-  B --> E["Regulatory Analysis<br>GRN, PANDA, LIONESS, scRNA"]
-  D --> F["Phylogenetic Analysis<br>Tree, Population"]
-  C --> G["Integration & Interpretation<br>Multi-omics, pathway enrichment"]
-  D --> G
-  E --> G
-  F --> G
-  G --> H["Visualization & Reporting<br>Figures, Notebooks, GitHub"]
 
-  %% Class definitions with contrasting blue/green tones
-  classDef start fill:#1e88e5,stroke:#0d47a1,color:#fff        
-  classDef preproc fill:#43a047,stroke:#1b5e20,color:#fff      
-  classDef seq fill:#66bb6a,stroke:#2e7d32,color:#fff          
-  classDef variant fill:#ffb300,stroke:#ff8f00,color:#000      
-  classDef reg fill:#8d6e63,stroke:#4e342e,color:#fff          
-  classDef phylo fill:#26a69a,stroke:#00695c,color:#fff        
-  classDef integrate fill:#5c6bc0,stroke:#283593,color:#fff    
-  classDef report fill:#ec407a,stroke:#ad1457,color:#fff      
+  A["Raw Biological Data<br/>FASTA · FASTQ · BAM · VCF · GTF · scRNA · MAGs"] 
 
-  %% Apply classes to nodes
-  class A start
-  class B preproc
+  --> B["Preprocessing & Quality Control<br/>Filtering · Trimming · Normalisation · Feature Extraction"]
+
+  %% =====================================================
+  %% CORE ANALYTICAL MODULES
+  %% =====================================================
+
+  B --> C["Sequence & Genome Architecture Analysis<br/>GC Content · GC Skew · Codon Usage · Motif Analysis · Protein Properties"]
+
+  B --> D["Comparative & Evolutionary Genomics<br/>Genome Reduction · Variant Annotation · Mutation Analysis · Comparative Genomics"]
+
+  B --> E["Phylogenetics & Evolutionary Inference<br/>Sequence Alignment · Distance Trees · Population Structure · Phylogenomics"]
+
+  B --> F["Transcriptomics & Regulatory Systems Biology<br/>RNA-seq · scRNA-seq · PANDA · LIONESS · Gene Regulatory Networks"]
+
+  B --> G["Metagenomics & Microbial Community Analysis<br/>Taxonomic Profiling · Community Composition · Functional Profiling"]
+
+  B --> H["Machine Learning & Predictive Modelling<br/>AMP Classification · Multi-label Learning · Systems-Level Prediction"]
+
+  %% =====================================================
+  %% INTEGRATION LAYER
+  %% =====================================================
+
+  C --> I["Integrated Biological Interpretation<br/>Multi-Omics Integration · Evolutionary Modelling · Pathway Crosstalk · Systems Biology"]
+
+  D --> I
+  E --> I
+  F --> I
+  G --> I
+  H --> I
+
+  %% =====================================================
+  %% OUTPUT
+  %% =====================================================
+
+  I --> J["Visualisation, Reproducibility & Deployment<br/>Publication Figures · Jupyter Notebooks · Snakemake · GitHub · HPC/GCP"]
+
+  %% =====================================================
+  %% COLOR CLASSES
+  %% =====================================================
+
+  classDef raw fill:#1565c0,stroke:#0d47a1,color:#fff
+  classDef qc fill:#2e7d32,stroke:#1b5e20,color:#fff
+
+  classDef seq fill:#43a047,stroke:#1b5e20,color:#fff
+  classDef evo fill:#00897b,stroke:#004d40,color:#fff
+  classDef phylo fill:#00acc1,stroke:#006064,color:#fff
+
+  classDef reg fill:#6a1b9a,stroke:#4a148c,color:#fff
+  classDef meta fill:#ef6c00,stroke:#e65100,color:#fff
+  classDef ml fill:#c62828,stroke:#8e0000,color:#fff
+
+  classDef integrate fill:#3949ab,stroke:#1a237e,color:#fff
+  classDef output fill:#d81b60,stroke:#880e4f,color:#fff
+
+  %% =====================================================
+  %% APPLY CLASSES
+  %% =====================================================
+
+  class A raw
+  class B qc
+
   class C seq
-  class D variant
-  class E reg
-  class F phylo
-  class G integrate
-  class H report
+  class D evo
+  class E phylo
+  class F reg
+  class G meta
+  class H ml
+
+  class I integrate
+  class J output
 ```
+
 
 ## 📂 Available Scripts
 
@@ -98,7 +142,7 @@ graph TD
 |--------|----------|----------------|
 | `codon_analysis.py` | Codon usage analysis | Completed|
 | `dna-protein.py` | Six-frame DNA translation | Completed|
-| `gc_calc.py` | GC content profiling | Completed|
+| `gc_skew_calc.py` | Archaeal GC Skew Analysis | Completed|
 | `gc_calc_pwa.py` | Comparative GC analysis | Completed |
 | `phylogenetic_analysis.py` | Distance-based tree construction | Completed |
 | `promoter_id.py` | Promoter/motif scanning | Completed |
@@ -111,9 +155,10 @@ graph TD
 |`mutation_annotation.py`| Annotation of mutations | Completed |
 | `adhesion_metabolism_crosstalk.py` | Pathway interaction analysis | Completed |
 | `somatic_variation.py` | Comparative genome analysis | Completed |
+| `gen_red_inf.py` | Comparative Genome Reduction Pipeline | Completed |
 | `scrna.ipynb` | Single-cell RNA seq data analysis | Completed |
 |`panda_lioness.ipynb`|Gene Regulatory Network analysis| Currently being run on the GCP platform.|
-|`ampml.ipynb`|Multi-label classification of antimicrobial proteins| Active Development |
+|`ampml.ipynb`|Multi-label classification of antimicrobial proteins| Complete |
 ---
 
 ## 🧪 Example Use Cases
