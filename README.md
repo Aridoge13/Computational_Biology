@@ -7,50 +7,90 @@
 
 ## 📘 Overview
 
-This repository documents a self-directed programme of computational biology work developed independently alongside formal academic training in Genomic Science. It is organised as a modular collection of Python tools and analytical notebooks spanning population genomics, cancer genomics, regulatory network inference, transcriptomics, and metagenomics. 
+This repository documents an independently developed computational biology and evolutionary genomics framework built alongside formal training in Genomic Science. The project integrates modular analytical tools, scalable workflows, and systems-level inference approaches spanning comparative genomics, transcriptomics, metagenomics, regulatory network biology, microbial evolution, and machine learning.
 
-The work reflects a deliberate progression toward systems-level approaches to understanding disease heterogeneity — from foundational sequence analysis and variant annotation through to single-cell RNA-seq workflows and patient-specific gene regulatory network inference using PANDA and LIONESS on TCGA ovarian cancer data. Tools are designed for reproducibility and modularity, and are compatible with HPC and cloud environments including GCP.
+The repository began with foundational sequence-analysis utilities and progressively expanded into large-scale computational workflows for comparative and evolutionary genomics, genome architecture analysis, transcriptomics, single-cell analysis, and patient-specific regulatory network inference. Current work includes archaeal genome organisation analysis, comparative genome reduction modelling, metagenomic profiling, and gene regulatory network reconstruction using PANDA and LIONESS on TCGA ovarian cancer datasets.
+
+Rather than functioning as isolated scripts, the modules are designed as interoperable components for reproducible biological inference across heterogeneous datasets and biological scales — from nucleotide-level sequence analysis through to systems-level modelling of cellular regulation and evolutionary processes.
+
+The repository emphasizes:
+
+* reproducible computational biology,
+* modular workflow design,
+* scalable genomics analysis,
+* evolutionary and systems-level interpretation,
+* compatibility with HPC and cloud-native environments including GCP.
+
 ---
 
 ## 🌟 Key Features
 
-- Supports standard genomic formats (FASTA, VCF, GTF, BAM, etc.)
-- Modular design — tools can be used independently or combined into workflows
-- Minimal dependencies and lightweight implementations
-- Suitable for rapid prototyping, teaching, and reproducible research
-- Compatible with automation frameworks and HPC environments
-- Applicable across microbial, plant, animal, and human genomics
+* Modular computational biology toolkit spanning genomics, transcriptomics, metagenomics, and systems biology
+* Support for standard biological data formats (FASTA, FASTQ, BAM, VCF, GTF/GFF, expression matrices)
+* Reproducible workflow-oriented design compatible with HPC and cloud environments
+* Lightweight analytical implementations for rapid prototyping and exploratory research
+* Comparative and evolutionary genomics utilities for microbial and eukaryotic systems
+* Integrated support for statistical analysis, visualisation, and biological interpretation
+* Applicable across microbial, plant, animal, and human genomics datasets
 
 ---
 
 ## 🔬 Functional Areas
 
-### 🧬 Genome & Variant Analysis
-- Variant annotation and prioritization
-- Structural and sequence-level variation analysis
-- Codon usage and GC content profiling
-- Motif and regulatory region detection
-- Sequence alignment scoring
+### 🧬 Sequence Analysis & Genome Architecture
 
-### 🌍 Evolutionary & Population Analysis
-- Phylogenetic tree construction
-- Population structure inference
-- Selection and divergence analysis
-- Comparative genomics workflows
+* GC content and cumulative GC skew analysis
+* Codon usage profiling and compositional analysis
+* DNA translation and protein sequence analysis
+* Protein motif detection and amino acid property analysis
+* Promoter and regulatory motif scanning
+* Pairwise alignment scoring (Needleman–Wunsch / Smith–Waterman)
 
-### 🧪 Transcriptomics & Functional Analysis
-- RNA-seq differential expression workflows
-- Expression visualization and clustering
-- Functional enrichment and pathway analysis
-- scRNA-seq data analysis
+### 🌍 Comparative & Evolutionary Genomics
 
-### 🌐 Metagenomics & Multi-omics
-- Taxonomic and functional profiling
-- Community-level sequence analysis
-- Integration of heterogeneous datasets
+* Comparative genome analysis and mutation annotation
+* Genome reduction and streamlining inference
+* Phylogenetic tree construction and evolutionary distance analysis
+* Population structure and divergence analysis
+* Comparative microbial and archaeal genomics workflows
+* Replication-associated genome organisation analysis
 
-### 🛠️ Applied Genomics Modules (Optional)
-Additional modules support domain-specific analyses such as structural variant interpretation, pangenome construction, and genetic load estimation.
+### 🧪 Transcriptomics & Regulatory Systems Biology
+
+* Bulk RNA-seq analysis and expression visualisation
+* Single-cell RNA-seq workflows
+* Differential expression and pathway enrichment analysis
+* Gene regulatory network inference using PANDA and LIONESS
+* Patient-specific network modelling on TCGA datasets
+* Pathway interaction and systems-level crosstalk analysis
+
+### 🌐 Metagenomics & Multi-Omics Integration
+
+* Taxonomic and functional metagenomic profiling
+* Community-level sequence analysis
+* Multi-omics data integration
+* Functional interpretation of heterogeneous biological datasets
+
+### 🤖 Machine Learning & Predictive Modelling
+
+* Multi-label classification of antimicrobial proteins
+* Predictive modelling workflows for biological datasets
+* Feature engineering for high-dimensional omics data
+* Exploratory machine learning integration for systems biology applications
+
+---
+
+## ⚙️ Infrastructure & Reproducibility
+
+The repository is designed around reproducible and scalable computational research practices:
+
+* Python-based modular architecture
+* Workflow compatibility with Snakemake and HPC systems
+* Cloud-compatible execution (including GCP)
+* Git-based version control and reproducible analysis tracking
+* Notebook-driven exploratory analysis and visualisation workflows
+
+The long-term direction of the project is the development of scalable computational frameworks for comparative genomics, systems biology, and evolutionary inference across complex biological datasets.
 
 ---
 
@@ -163,12 +203,17 @@ graph TD
 
 ## 🧪 Example Use Cases
 
-- Characterize sequence composition and codon bias across genes or species  
-- Annotate variants and prioritize functional candidates  
-- Infer evolutionary relationships from genomic data  
-- Analyze RNA-seq expression patterns  
-- Profile microbial communities from shotgun sequencing  
-- Prototype analysis pipelines before large-scale deployment  
+* Analyse genome architecture, replication symmetry, and compositional bias across archaeal, bacterial, and eukaryotic genomes
+* Perform comparative genomics and genome reduction analyses in microbial and symbiotic systems
+* Construct phylogenetic relationships and investigate evolutionary divergence across populations or species
+* Detect regulatory motifs, promoter regions, and protein sequence signatures associated with functional adaptation
+* Annotate genomic variants and evaluate potential functional or evolutionary consequences
+* Process and visualise bulk RNA-seq and single-cell transcriptomic datasets
+* Infer patient-specific gene regulatory networks using PANDA and LIONESS frameworks
+* Profile microbial community composition and functional potential from metagenomic sequencing data
+* Integrate heterogeneous omics datasets for pathway-level and systems biology interpretation
+* Develop and prototype scalable computational workflows prior to HPC or cloud-scale deployment
+* Apply machine learning approaches to biological sequence classification and predictive modelling tasks
 
 ---
 
