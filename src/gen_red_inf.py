@@ -143,9 +143,12 @@ def analyse_genome(name, fasta_path):
 
     n_genes = len(records)
 
-    coding_density = total_bp / total_bp
-
     avg_protein_length = np.mean(cds_lengths)
+
+    mean_intergenic_estimate = 1000  # conservative estimate for archaea
+    estimated_genome_size = n_genes * (avg_protein_length + mean_intergenic_estimate)
+    
+    coding_density_proxy = total_bp / estimated_genome_size
 
     hypothetical_fraction = hypothetical_count / n_genes
 
@@ -171,6 +174,7 @@ def analyse_genome(name, fasta_path):
         "avg_gene_length": avg_protein_length,
         "hypothetical_fraction": hypothetical_fraction,
         "atpase_genes": atpase_count,
+        "coding_density": coding_density_proxy,
         "GDI": gdi
     }
 
