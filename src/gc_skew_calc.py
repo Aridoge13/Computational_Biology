@@ -4,27 +4,73 @@ import matplotlib.pyplot as plt
 import os
 
 # Configuration
-Entrez.email = "example@email.com"
+Entrez.email = "aritra.mukherjee98@gmail.com"  # Change to your email
 
 GENOMES = {
-    # Asgard archaea
+    # ASGARD
     "Lokiarchaeota": {"accession": "GCA_001940045.1", "group": "Asgard"},
     "Thorarchaeota": {"accession": "GCA_002775275.1", "group": "Asgard"},
     "Heimdallarchaeota": {"accession": "GCA_002728275.1", "group": "Asgard"},
-    # TACK archaea
+    "Odinarchaeota_LCB_4": {"accession": "GCA_002499645.1", "group": "Asgard"},
+    "Prometheoarchaeum_syntrophicum": {"accession": "GCA_014524485.1", "group": "Asgard"},
+    "Candidatus_Hodarchaeia": {"accession": "GCA_017607445.1", "group": "Asgard"},
+    "Candidatus_Jordarchaeia": {"accession": "GCA_017607455.1", "group": "Asgard"},
+    "Hermodarchaeota": {"accession": "GCA_012841095.1", "group": "Asgard"},
+    "Baldrarchaeota": {"accession": "GCA_017607435.1", "group": "Asgard"},
+    "Tyrarchaeota": {"accession": "GCA_017607425.1", "group": "Asgard"},
+
+    # DPANN
+    "Nanoarchaeum_equitans": {"accession": "GCA_000091665.1", "group": "DPANN"},
+    "Candidatus_Parvarchaeum_acidophilus_ARMAN5": {"accession": "GCA_002412085.1", "group": "DPANN"},
+    "archaeon_GW2011_AR5": {"accession": "GCA_000806115.1", "group": "DPANN"},
+    "Candidatus_Micrarchaeum_harzensis": {"accession": "GCA_000819665.1", "group": "DPANN"},
+    "Candidatus_Mancarchaeum_acidiphilum": {"accession": "GCA_001563885.1", "group": "DPANN"},
+    "Candidatus_Woesearchaeota_archaeon_AR20": {"accession": "GCA_002495055.1", "group": "DPANN"},
+    "Candidatus_Pacearchaeota_archaeon": {"accession": "GCA_002495065.1", "group": "DPANN"},
+    "Candidatus_Diapherotrites_archaeon": {"accession": "GCA_002495075.1", "group": "DPANN"},
+    "Candidatus_Aenigmarchaeota_archaeon": {"accession": "GCA_002495085.1", "group": "DPANN"},
+    "Candidatus_Huberarchaeum_crystalense": {"accession": "GCA_002503445.1", "group": "DPANN"},
+
+    # TACK
     "Sulfolobus_solfataricus": {"accession": "GCA_000007005.1", "group": "TACK"},
-    "Nitrosopumilus_maritimus": {"accession": "GCA_000018465.1", "group": "TACK"},
+    "Sulfolobus_acidocaldarius": {"accession": "GCA_000009965.1", "group": "TACK"},
     "Pyrobaculum_aerophilum": {"accession": "GCA_000007225.1", "group": "TACK"},
-    # Euryarchaeota
+    "Nitrosopumilus_maritimus": {"accession": "GCA_000018465.1", "group": "TACK"},
+    "Ignicoccus_hospitalis": {"accession": "GCA_000021665.1", "group": "TACK"},
+    "Thermoproteus_tenax": {"accession": "GCA_000021505.1", "group": "TACK"},
+    "Metallosphaera_sedula": {"accession": "GCA_000011205.1", "group": "TACK"},
+    "Aeropyrum_pernix": {"accession": "GCA_000011125.1", "group": "TACK"},
+    "Thermofilum_pendens": {"accession": "GCA_000024705.1", "group": "TACK"},
+    "Caldivirga_maquilingensis": {"accession": "GCA_000204585.1", "group": "TACK"},
+
+    # EURYARCHAEOTA
     "Methanobacterium_thermo": {"accession": "GCA_000008545.1", "group": "Euryarchaeota"},
     "Haloarcula_marismortui": {"accession": "GCA_000011085.1", "group": "Euryarchaeota"},
     "Archaeoglobus_fulgidus": {"accession": "GCA_000007685.1", "group": "Euryarchaeota"},
-    # Bacteria (reference comparison)
-    "Escherichia_coli_K12": {"accession": "GCA_000005845.2", "group": "Bacteria"},
-    "Bacillus_subtilis": {"accession": "GCA_000009045.1", "group": "Bacteria"},
+    "Methanocaldococcus_jannaschii": {"accession": "GCA_000091665.2", "group": "Euryarchaeota"},
+    "Methanosarcina_mazei": {"accession": "GCA_000007345.1", "group": "Euryarchaeota"},
+    "Methanococcus_maripaludis": {"accession": "GCA_000011585.1", "group": "Euryarchaeota"},
+    "Methanopyrus_kandleri": {"accession": "GCA_000011725.1", "group": "Euryarchaeota"},
+    "Halobacterium_salinarum": {"accession": "GCA_000006805.1", "group": "Euryarchaeota"},
+    "Methanobrevibacter_smithii": {"accession": "GCA_000016525.1", "group": "Euryarchaeota"},
+    "Thermococcus_kodakarensis": {"accession": "GCA_000009965.2", "group": "Euryarchaeota"},
+
+    # REDUCED BACTERIAL SYMBIONTS
+    "Buchnera_aphidicola_APS": {"accession": "GCA_000009605.1", "group": "Symbiont"},
+    "Wigglesworthia_glossinidia": {"accession": "GCA_000009785.1", "group": "Symbiont"},
+    "Blochmannia_floridanus": {"accession": "GCA_000009625.1", "group": "Symbiont"},
+    "Carsonella_ruddii": {"accession": "GCA_000012245.1", "group": "Symbiont"},
+    "Tremblaya_princeps": {"accession": "GCA_000014525.1", "group": "Symbiont"},
+    "Hodgkinia_cicadicola": {"accession": "GCA_000155385.1", "group": "Symbiont"},
+    "Baumannia_cicadellinicola": {"accession": "GCA_000009845.1", "group": "Symbiont"},
+    "Portiera_aleyrodidarum": {"accession": "GCA_000147015.1", "group": "Symbiont"},
+    "Nasuia_deltocephalinicola": {"accession": "GCA_000334075.1", "group": "Symbiont"},
+    "Sulcia_muelleri": {"accession": "GCA_000010105.1", "group": "Symbiont"},
 }
 
+
 GROUP_COLORS = {
+    "DPANN": "#9B5DE5",
     "Asgard": "#E63946",
     "TACK": "#2A9D8F",
     "Euryarchaeota": "#E9C46A",
@@ -36,20 +82,21 @@ FIGURES_DIR = "figures"
 os.makedirs(GENOME_DIR, exist_ok=True)
 os.makedirs(FIGURES_DIR, exist_ok=True)
 
-
 # Core Functions
 
 def gc_content(seq):
-    """Calculate GC content of a DNA sequence."""
     gc_count = seq.count("G") + seq.count("C")
     return (gc_count / len(seq)) * 100 if len(seq) > 0 else 0
 
-
 def gc_skew(seq, window=10000, step=5000):
-    """Compute GC skew in sliding windows across a sequence."""
+    seq = str(seq).upper()
+    if len(seq) < window:
+        window = max(1, len(seq) // 2)
+        step = window // 2 if window > 1 else 1
+        print(f"    [notice] Sequence length {len(seq)} < default window; using window={window}")
+
     skews = []
     positions = []
-    seq = str(seq).upper()
     for i in range(0, len(seq) - window, step):
         window_seq = seq[i:i + window]
         g = window_seq.count('G')
@@ -58,21 +105,18 @@ def gc_skew(seq, window=10000, step=5000):
         skew = (g - c) / denom if denom > 0 else 0
         skews.append(skew)
         positions.append(i + window // 2)
+
+    if not positions:
+        positions = [0]
+        skews = [0]
     return np.array(positions), np.array(skews)
 
-
 def cumulative_gc_skew(skews):
-    """Compute cumulative GC skew — reveals origin/terminus positions."""
     return np.cumsum(skews)
-
 
 # Data Acquisition
 
 def download_genome(name, accession, genome_dir=GENOME_DIR):
-    """
-    Download genome FASTA from NCBI if not already present.
-    Returns path to the FASTA file.
-    """
     fasta_path = os.path.join(genome_dir, f"{name}.fasta")
     if os.path.exists(fasta_path):
         print(f"  [cached] {name}")
@@ -80,35 +124,21 @@ def download_genome(name, accession, genome_dir=GENOME_DIR):
 
     print(f"  [downloading] {name} ({accession})...")
     try:
-        search_handle = Entrez.esearch(db="assembly", term=accession)
-        search_record = Entrez.read(search_handle)
-        search_handle.close()
-
-        # Fetch via nuccore linked to assembly
-        link_handle = Entrez.elink(
-            dbfrom="assembly",
-            db="nuccore",
-            id=search_record["IdList"][0],
-            linkname="assembly_nuccore_refseq"
-        )
-        link_record = Entrez.read(link_handle)
-        link_handle.close()
-
-        nuc_ids = [
-            link["Id"]
-            for link in link_record[0]["LinkSetDb"][0]["Link"]
-        ]
-
-        # Fetch only the largest sequence (main chromosome)
+        # Directly fetch the full assembly from the Assembly database
         fetch_handle = Entrez.efetch(
-            db="nuccore",
-            id=nuc_ids[0],
+            db="assembly",
+            id=accession,
             rettype="fasta",
             retmode="text"
         )
-        with open(fasta_path, "w") as f:
-            f.write(fetch_handle.read())
+        content = fetch_handle.read()
         fetch_handle.close()
+
+        if not content.strip():
+            raise ValueError("Empty FASTA content")
+
+        with open(fasta_path, "w") as f:
+            f.write(content)
         print(f"  [saved] {fasta_path}")
         return fasta_path
 
@@ -116,26 +146,15 @@ def download_genome(name, accession, genome_dir=GENOME_DIR):
         print(f"  [error] Could not download {name}: {e}")
         return None
 
-
 def load_primary_sequence(fasta_path):
-    """
-    Load the longest sequence from a FASTA file.
-    For multi-chromosome genomes, this returns the primary chromosome.
-    """
     records = list(SeqIO.parse(fasta_path, "fasta"))
     if not records:
         return None
-    # Return longest sequence — most likely the main chromosome
     return max(records, key=lambda r: len(r.seq))
-
 
 # Analysis
 
 def analyse_genome(name, fasta_path):
-    """
-    Run GC content, GC skew, and cumulative skew analysis for one genome.
-    Returns a results dictionary.
-    """
     record = load_primary_sequence(fasta_path)
     if record is None:
         print(f"  [warning] No sequence found for {name}")
@@ -143,14 +162,18 @@ def analyse_genome(name, fasta_path):
 
     seq = str(record.seq).upper()
     genome_len = len(seq)
+    if genome_len < 100:
+        print(f"  [warning] Genome too short ({genome_len} bp) for meaningful skew; skipping")
+        return None
 
     positions, skews = gc_skew(seq)
     cum_skews = cumulative_gc_skew(skews)
 
-    # Normalise positions to genome fraction for cross-species comparison
-    norm_positions = positions / genome_len
+    if cum_skews.size == 0:
+        print(f"  [warning] No skew values computed for {name}; skipping")
+        return None
 
-    # Summary statistics
+    norm_positions = positions / genome_len
     gc = gc_content(seq)
     skew_amplitude = cum_skews.max() - cum_skews.min()
     predicted_origin_fraction = norm_positions[np.argmin(cum_skews)]
@@ -166,18 +189,17 @@ def analyse_genome(name, fasta_path):
         "predicted_origin_fraction": predicted_origin_fraction,
     }
 
-
 # Visualisation
 
 def plot_cumulative_skew(results_list, genome_metadata):
-    """
-    Figure 1: Cumulative GC skew across all genomes.
-    One subplot per genome, coloured by lineage.
-    """
+    results_list = [r for r in results_list if r is not None]
+    if not results_list:
+        print("No valid results to plot cumulative skew.")
+        return
+
     n = len(results_list)
     ncols = 3
     nrows = int(np.ceil(n / ncols))
-
     fig, axes = plt.subplots(nrows, ncols, figsize=(15, nrows * 3.5))
     axes = axes.flatten()
 
@@ -187,102 +209,53 @@ def plot_cumulative_skew(results_list, genome_metadata):
         group = genome_metadata[name]["group"]
         color = GROUP_COLORS[group]
 
-        ax.plot(
-            result["norm_positions"],
-            result["cum_skews"],
-            color=color,
-            linewidth=1.5
-        )
+        ax.plot(result["norm_positions"], result["cum_skews"],
+                color=color, linewidth=1.5)
         ax.axhline(0, color="black", linewidth=0.5, linestyle="--")
-        ax.set_title(
-            f"{name.replace('_', ' ')}\n({group})",
-            fontsize=8,
-            fontweight="bold"
-        )
+        ax.set_title(f"{name.replace('_', ' ')}\n({group})", fontsize=8, fontweight="bold")
         ax.set_xlabel("Genome position (fraction)", fontsize=7)
         ax.set_ylabel("Cumulative GC skew", fontsize=7)
         ax.tick_params(labelsize=7)
 
-    # Hide unused subplots
     for idx in range(len(results_list), len(axes)):
         axes[idx].set_visible(False)
 
-    # Legend
     from matplotlib.patches import Patch
-    legend_elements = [
-        Patch(facecolor=color, label=group)
-        for group, color in GROUP_COLORS.items()
-    ]
-    fig.legend(
-        handles=legend_elements,
-        loc="lower right",
-        fontsize=9,
-        title="Lineage"
-    )
+    legend_elements = [Patch(facecolor=color, label=group) for group, color in GROUP_COLORS.items()]
+    fig.legend(handles=legend_elements, loc="lower right", fontsize=9, title="Lineage")
 
-    fig.suptitle(
-        "Cumulative GC Skew Across Archaeal and Bacterial Genomes",
-        fontsize=13,
-        fontweight="bold",
-        y=1.01
-    )
+    fig.suptitle("Cumulative GC Skew Across Archaeal and Bacterial Genomes", fontsize=13, fontweight="bold", y=1.01)
     plt.tight_layout()
     path = os.path.join(FIGURES_DIR, "figure1_cumulative_gc_skew.png")
     plt.savefig(path, dpi=300, bbox_inches="tight")
     print(f"[saved] {path}")
     plt.close()
 
-
 def plot_summary_scatter(results_list, genome_metadata):
-    """
-    Figure 2: Skew amplitude vs predicted origin position.
-    Each point is one genome, coloured by lineage, labelled by name.
-    """
-    fig, ax = plt.subplots(figsize=(10, 7))
+    results_list = [r for r in results_list if r is not None]
+    if not results_list:
+        print("No valid results to plot summary scatter.")
+        return
 
+    fig, ax = plt.subplots(figsize=(10, 7))
     for result in results_list:
         name = result["name"]
         group = genome_metadata[name]["group"]
         color = GROUP_COLORS[group]
 
-        ax.scatter(
-            result["predicted_origin_fraction"],
-            result["skew_amplitude"],
-            color=color,
-            s=100,
-            zorder=3,
-            edgecolors="black",
-            linewidths=0.5
-        )
-        ax.annotate(
-            name.replace("_", " "),
-            (result["predicted_origin_fraction"], result["skew_amplitude"]),
-            fontsize=7,
-            xytext=(5, 3),
-            textcoords="offset points"
-        )
+        ax.scatter(result["predicted_origin_fraction"], result["skew_amplitude"],
+                   color=color, s=100, zorder=3, edgecolors="black", linewidths=0.5)
+        ax.annotate(name.replace("_", " "),
+                    (result["predicted_origin_fraction"], result["skew_amplitude"]),
+                    fontsize=7, xytext=(5, 3), textcoords="offset points")
 
-    # Legend
     from matplotlib.patches import Patch
-    legend_elements = [
-        Patch(facecolor=color, label=group)
-        for group, color in GROUP_COLORS.items()
-    ]
+    legend_elements = [Patch(facecolor=color, label=group) for group, color in GROUP_COLORS.items()]
     ax.legend(handles=legend_elements, title="Lineage", fontsize=9)
 
-    ax.set_xlabel(
-        "Predicted origin position (genome fraction)",
-        fontsize=11
-    )
-    ax.set_ylabel(
-        "Cumulative skew amplitude\n(proxy for replication symmetry)",
-        fontsize=11
-    )
-    ax.set_title(
-        "Replication-Associated GC Skew: Summary Across Lineages",
-        fontsize=12,
-        fontweight="bold"
-    )
+    ax.set_xlabel("Predicted origin position (genome fraction)", fontsize=11)
+    ax.set_ylabel("Cumulative skew amplitude\n(proxy for replication symmetry)", fontsize=11)
+    ax.set_title("Replication-Associated GC Skew: Summary Across Lineages", fontsize=12, fontweight="bold")
     ax.grid(True, linestyle="--", alpha=0.4)
     plt.tight_layout()
     path = os.path.join(FIGURES_DIR, "figure2_skew_summary.png")
@@ -290,30 +263,28 @@ def plot_summary_scatter(results_list, genome_metadata):
     print(f"[saved] {path}")
     plt.close()
 
-
 def print_summary_table(results_list, genome_metadata):
-    """Print a summary table of key metrics for all genomes."""
+    results_list = [r for r in results_list if r is not None]
+    if not results_list:
+        print("No valid results to print.")
+        return
+
     print(f"\n{'Name':<35} {'Group':<15} {'Length (Mb)':<12} "
           f"{'GC%':<8} {'Amplitude':<12} {'Pred. Origin':<12}")
     print("-" * 95)
     for r in results_list:
         group = genome_metadata[r['name']]['group']
-        print(
-            f"{r['name'].replace('_', ' '):<35} "
-            f"{group:<15} "
-            f"{r['genome_length']/1e6:<12.2f} "
-            f"{r['gc_content']:<8.1f} "
-            f"{r['skew_amplitude']:<12.3f} "
-            f"{r['predicted_origin_fraction']:<12.3f}"
-        )
-
+        print(f"{r['name'].replace('_', ' '):<35} "
+              f"{group:<15} "
+              f"{r['genome_length']/1e6:<12.2f} "
+              f"{r['gc_content']:<8.1f} "
+              f"{r['skew_amplitude']:<12.3f} "
+              f"{r['predicted_origin_fraction']:<12.3f}")
 
 # Main
 
 if __name__ == "__main__":
     print("=== Archaeal GC Skew Analysis ===\n")
-
-    # Download all genomes
     print("[1] Acquiring genomes...")
     fasta_paths = {}
     for name, meta in GENOMES.items():
@@ -321,7 +292,6 @@ if __name__ == "__main__":
         if path:
             fasta_paths[name] = path
 
-    # Run analysis
     print("\n[2] Running GC skew analysis...")
     results = []
     for name, path in fasta_paths.items():
@@ -330,11 +300,9 @@ if __name__ == "__main__":
         if result:
             results.append(result)
 
-    # Print summary
     print("\n[3] Summary statistics:")
     print_summary_table(results, GENOMES)
 
-    # Generate figures
     print("\n[4] Generating figures...")
     plot_cumulative_skew(results, GENOMES)
     plot_summary_scatter(results, GENOMES)
