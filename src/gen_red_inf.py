@@ -10,7 +10,7 @@ from sklearn.preprocessing import StandardScaler
 from adjustText import adjust_text
 
 # ==================== CONFIGURATION ====================
-Entrez.email = "aritra.mukherjee98@gmail.com"
+Entrez.email = "john.bioinformatics@email.com"
 
 GENOMES = {
     # ASGARD

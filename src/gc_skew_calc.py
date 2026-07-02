@@ -2,9 +2,11 @@ from Bio import SeqIO, Entrez
 import numpy as np
 import matplotlib.pyplot as plt
 import os
+import urllib.request
+import gzip
 
 # Configuration
-Entrez.email = "aritra.mukherjee98@gmail.com"  # Change to your email
+Entrez.email = "john.bioinformatics@gmail.com"
 
 GENOMES = {
     # ASGARD
@@ -68,13 +70,13 @@ GENOMES = {
     "Sulcia_muelleri": {"accession": "GCA_000010105.1", "group": "Symbiont"},
 }
 
-
 GROUP_COLORS = {
     "DPANN": "#9B5DE5",
     "Asgard": "#E63946",
     "TACK": "#2A9D8F",
     "Euryarchaeota": "#E9C46A",
-    "Bacteria": "#AAAAAA",
+    "Symbiont": "#AAAAAA",
+    "__default__": "#888888"
 }
 
 GENOME_DIR = "genomes"
@@ -82,11 +84,14 @@ FIGURES_DIR = "figures"
 os.makedirs(GENOME_DIR, exist_ok=True)
 os.makedirs(FIGURES_DIR, exist_ok=True)
 
-# Core Functions
+# ----------------------------------------------------------------------
+# Core functions (unchanged)
+# ----------------------------------------------------------------------
 
 def gc_content(seq):
-    gc_count = seq.count("G") + seq.count("C")
-    return (gc_count / len(seq)) * 100 if len(seq) > 0 else 0
+    seq = seq.upper()
+    gc = seq.count("G") + seq.count("C")
+    return (gc / len(seq)) * 100 if len(seq) > 0 else 0
 
 def gc_skew(seq, window=10000, step=5000):
     seq = str(seq).upper()
@@ -114,9 +119,15 @@ def gc_skew(seq, window=10000, step=5000):
 def cumulative_gc_skew(skews):
     return np.cumsum(skews)
 
-# Data Acquisition
+# ----------------------------------------------------------------------
+# FIXED DOWNLOAD FUNCTION (using FTP)
+# ----------------------------------------------------------------------
 
 def download_genome(name, accession, genome_dir=GENOME_DIR):
+    """
+    Download full genomic FASTA (not CDS) from NCBI Assembly FTP.
+    Uses the GenBank FTP path; falls back to RefSeq if needed.
+    """
     fasta_path = os.path.join(genome_dir, f"{name}.fasta")
     if os.path.exists(fasta_path):
         print(f"  [cached] {name}")
@@ -124,21 +135,38 @@ def download_genome(name, accession, genome_dir=GENOME_DIR):
 
     print(f"  [downloading] {name} ({accession})...")
     try:
-        # Directly fetch the full assembly from the Assembly database
-        fetch_handle = Entrez.efetch(
-            db="assembly",
-            id=accession,
-            rettype="fasta",
-            retmode="text"
-        )
-        content = fetch_handle.read()
-        fetch_handle.close()
+        # 1. Get assembly summary
+        search = Entrez.esearch(db="assembly", term=accession)
+        search_record = Entrez.read(search)
+        if not search_record["IdList"]:
+            raise ValueError(f"No assembly found for: {accession}")
+        assembly_id = search_record["IdList"][0]
 
-        if not content.strip():
-            raise ValueError("Empty FASTA content")
+        summary = Entrez.esummary(db="assembly", id=assembly_id)
+        summary_record = Entrez.read(summary)
+        doc_summary = summary_record["DocumentSummarySet"]["DocumentSummary"][0]
 
-        with open(fasta_path, "w") as f:
-            f.write(content)
+        # 2. Get FTP path (GenBank preferred)
+        ftp_path = doc_summary.get("FtpPath_GenBank", "")
+        if not ftp_path:
+            ftp_path = doc_summary.get("FtpPath_RefSeq", "")
+        if not ftp_path:
+            raise ValueError("No FTP path available for this assembly")
+
+        # 3. Build URL for genomic FASTA (not CDS)
+        base_name = os.path.basename(ftp_path)
+        url = f"{ftp_path}/{base_name}_genomic.fna.gz"
+
+        # 4. Download and decompress
+        gz_path = fasta_path + ".gz"
+        req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
+        with urllib.request.urlopen(req) as response, open(gz_path, 'wb') as out:
+            out.write(response.read())
+
+        with gzip.open(gz_path, "rt") as f_in, open(fasta_path, "w") as f_out:
+            f_out.write(f_in.read())
+
+        os.remove(gz_path)
         print(f"  [saved] {fasta_path}")
         return fasta_path
 
@@ -146,21 +174,23 @@ def download_genome(name, accession, genome_dir=GENOME_DIR):
         print(f"  [error] Could not download {name}: {e}")
         return None
 
-def load_primary_sequence(fasta_path):
+# ----------------------------------------------------------------------
+# Analysis (unchanged, uses concatenated assembly)
+# ----------------------------------------------------------------------
+
+def load_concatenated_sequence(fasta_path):
     records = list(SeqIO.parse(fasta_path, "fasta"))
     if not records:
         return None
-    return max(records, key=lambda r: len(r.seq))
-
-# Analysis
+    return "".join(str(record.seq) for record in records)
 
 def analyse_genome(name, fasta_path):
-    record = load_primary_sequence(fasta_path)
-    if record is None:
+    concat_seq = load_concatenated_sequence(fasta_path)
+    if concat_seq is None:
         print(f"  [warning] No sequence found for {name}")
         return None
 
-    seq = str(record.seq).upper()
+    seq = concat_seq.upper()
     genome_len = len(seq)
     if genome_len < 100:
         print(f"  [warning] Genome too short ({genome_len} bp) for meaningful skew; skipping")
@@ -189,7 +219,12 @@ def analyse_genome(name, fasta_path):
         "predicted_origin_fraction": predicted_origin_fraction,
     }
 
-# Visualisation
+# ----------------------------------------------------------------------
+# Plotting and summary (unchanged)
+# ----------------------------------------------------------------------
+
+def get_color(group):
+    return GROUP_COLORS.get(group, GROUP_COLORS["__default__"])
 
 def plot_cumulative_skew(results_list, genome_metadata):
     results_list = [r for r in results_list if r is not None]
@@ -207,7 +242,7 @@ def plot_cumulative_skew(results_list, genome_metadata):
         ax = axes[idx]
         name = result["name"]
         group = genome_metadata[name]["group"]
-        color = GROUP_COLORS[group]
+        color = get_color(group)
 
         ax.plot(result["norm_positions"], result["cum_skews"],
                 color=color, linewidth=1.5)
@@ -221,10 +256,13 @@ def plot_cumulative_skew(results_list, genome_metadata):
         axes[idx].set_visible(False)
 
     from matplotlib.patches import Patch
-    legend_elements = [Patch(facecolor=color, label=group) for group, color in GROUP_COLORS.items()]
+    legend_elements = [Patch(facecolor=color, label=group)
+                       for group, color in GROUP_COLORS.items()
+                       if group != "__default__"]
     fig.legend(handles=legend_elements, loc="lower right", fontsize=9, title="Lineage")
 
-    fig.suptitle("Cumulative GC Skew Across Archaeal and Bacterial Genomes", fontsize=13, fontweight="bold", y=1.01)
+    fig.suptitle("Cumulative GC Skew Across Archaeal and Bacterial Genomes",
+                 fontsize=13, fontweight="bold", y=1.01)
     plt.tight_layout()
     path = os.path.join(FIGURES_DIR, "figure1_cumulative_gc_skew.png")
     plt.savefig(path, dpi=300, bbox_inches="tight")
@@ -241,7 +279,7 @@ def plot_summary_scatter(results_list, genome_metadata):
     for result in results_list:
         name = result["name"]
         group = genome_metadata[name]["group"]
-        color = GROUP_COLORS[group]
+        color = get_color(group)
 
         ax.scatter(result["predicted_origin_fraction"], result["skew_amplitude"],
                    color=color, s=100, zorder=3, edgecolors="black", linewidths=0.5)
@@ -250,12 +288,15 @@ def plot_summary_scatter(results_list, genome_metadata):
                     fontsize=7, xytext=(5, 3), textcoords="offset points")
 
     from matplotlib.patches import Patch
-    legend_elements = [Patch(facecolor=color, label=group) for group, color in GROUP_COLORS.items()]
+    legend_elements = [Patch(facecolor=color, label=group)
+                       for group, color in GROUP_COLORS.items()
+                       if group != "__default__"]
     ax.legend(handles=legend_elements, title="Lineage", fontsize=9)
 
     ax.set_xlabel("Predicted origin position (genome fraction)", fontsize=11)
     ax.set_ylabel("Cumulative skew amplitude\n(proxy for replication symmetry)", fontsize=11)
-    ax.set_title("Replication-Associated GC Skew: Summary Across Lineages", fontsize=12, fontweight="bold")
+    ax.set_title("Replication-Associated GC Skew: Summary Across Lineages",
+                 fontsize=12, fontweight="bold")
     ax.grid(True, linestyle="--", alpha=0.4)
     plt.tight_layout()
     path = os.path.join(FIGURES_DIR, "figure2_skew_summary.png")
@@ -281,7 +322,9 @@ def print_summary_table(results_list, genome_metadata):
               f"{r['skew_amplitude']:<12.3f} "
               f"{r['predicted_origin_fraction']:<12.3f}")
 
+# ----------------------------------------------------------------------
 # Main
+# ----------------------------------------------------------------------
 
 if __name__ == "__main__":
     print("=== Archaeal GC Skew Analysis ===\n")
