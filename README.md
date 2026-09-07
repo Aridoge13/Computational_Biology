@@ -5,6 +5,8 @@
 ![GitHub issues](https://img.shields.io/github/issues/Aridoge13/Computational_Biology)
 ![GitHub last commit](https://img.shields.io/github/last-commit/Aridoge13/Computational_Biology)
 
+![alt text](logo/Toolkit.png)
+
 ## 📘 Overview
 
 This repository documents an independently developed computational biology and evolutionary genomics framework built alongside formal training in Genomic Science. The project integrates modular analytical tools, scalable workflows, and systems-level inference approaches spanning comparative genomics, transcriptomics, metagenomics, regulatory network biology, microbial evolution, and machine learning.
