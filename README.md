@@ -1,7 +1,7 @@
 # 🧬 Computational Biology Toolkit for Genomic Analysis
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-![Python](https://img.shields.io/badge/python-3.7%2B-blue)
+![Python](https://img.shields.io/badge/python-3.9%2B-blue)
 ![GitHub issues](https://img.shields.io/github/issues/Aridoge13/Computational_Biology)
 ![GitHub last commit](https://img.shields.io/github/last-commit/Aridoge13/Computational_Biology)
 
@@ -11,7 +11,7 @@
 
 This repository documents an independently developed computational biology and evolutionary genomics framework built alongside formal training in Genomic Science. The project integrates modular analytical tools, scalable workflows, and systems-level inference approaches spanning comparative genomics, transcriptomics, metagenomics, regulatory network biology, microbial evolution, and machine learning.
 
-The repository began with foundational sequence-analysis utilities and progressively expanded into large-scale computational workflows for comparative and evolutionary genomics, genome architecture analysis, transcriptomics, single-cell analysis, and patient-specific regulatory network inference. Current work includes archaeal genome organisation analysis, comparative genome reduction modelling, metagenomic profiling, and gene regulatory network reconstruction using PANDA and LIONESS on TCGA ovarian cancer datasets.
+The repository began with foundational sequence-analysis utilities and progressively expanded into large-scale computational workflows for comparative and evolutionary genomics, genome architecture analysis, transcriptomics, single-cell analysis, and patient-specific regulatory network inference. Current work includes archaeal genome organisation analysis, comparative genome reduction modelling, metagenomic profiling, and gene regulatory network reconstruction using PANDA and LIONESS on TCGA ovarian cancer datasets. Recent additions include `seqgraph.py`, a single-file tool that represents a viral population as a variation graph and links its variant sites to gene annotations and sample metadata.
 
 Rather than functioning as isolated scripts, the modules are designed as interoperable components for reproducible biological inference across heterogeneous datasets and biological scales — from nucleotide-level sequence analysis through to systems-level modelling of cellular regulation and evolutionary processes.
 
@@ -34,6 +34,7 @@ The repository emphasizes:
 * Comparative and evolutionary genomics utilities for microbial and eukaryotic systems
 * Integrated support for statistical analysis, visualisation, and biological interpretation
 * Applicable across microbial, plant, animal, and human genomics datasets
+* Graph-based analysis of viral populations, from alignment to variation graph, variant sites, and GFA export
 
 ---
 
@@ -72,6 +73,15 @@ The repository emphasizes:
 * Community-level sequence analysis
 * Multi-omics data integration
 * Functional interpretation of heterogeneous biological datasets
+
+### 🕸️ Graph-Based Analysis of Viral Populations
+
+* Variation graph construction from a multiple sequence alignment of viral haplotypes
+* Bubble detection to identify variant sites, with allele frequencies and entropy per site
+* Heaviest path (consensus), k-best paths, and counts of the haplotype space the graph allows
+* Mutational hotspot windows and codon-level impact of SNPs in annotated genes
+* Sample-level diversity and rank correlation of allele frequencies with numeric metadata
+* GFA 1.0 export and an interactive HTML viewer
 
 ### 🤖 Machine Learning & Predictive Modelling
 
@@ -122,6 +132,11 @@ graph TD
   B --> G["Metagenomics & Microbial Community Analysis<br/>Taxonomic Profiling · Community Composition · Functional Profiling"]
 
   B --> H["Machine Learning & Predictive Modelling<br/>AMP Classification · Multi-label Learning · Systems-Level Prediction"]
+  B --> K["Variation Graph Analysis of Viral Populations<br/>Alignment to Graph · Bubbles · Haplotype Paths · GFA · Metadata Association"]
+
+  K --> I
+
+  
 
   %% =====================================================
   %% INTEGRATION LAYER
@@ -156,6 +171,8 @@ graph TD
   classDef meta fill:#ef6c00,stroke:#e65100,color:#fff
   classDef ml fill:#c62828,stroke:#8e0000,color:#fff
 
+  classDef vgraph fill:#5d4037,stroke:#3e2723,color:#fff
+
   classDef integrate fill:#3949ab,stroke:#1a237e,color:#fff
   classDef output fill:#d81b60,stroke:#880e4f,color:#fff
 
@@ -175,6 +192,7 @@ graph TD
 
   class I integrate
   class J output
+  class K vgraph
 ```
 
 
@@ -201,7 +219,50 @@ graph TD
 | `scrna.ipynb` | Single-cell RNA seq data analysis | Completed |
 |`panda_lioness.ipynb`|Gene Regulatory Network analysis| Currently being run on the GCP platform.|
 |`ampml.ipynb`|Multi-label classification of antimicrobial proteins| Complete |
+| `seqgraph.py` | Variation graph construction and analysis for viral populations | Prototype, tested on simulated data |
 ---
+
+## 🕸️ seqgraph: Variation Graphs for Viral Populations
+
+`seqgraph.py` is a single Python file with no third-party dependencies. It turns an alignment of viral haplotypes into a variation graph and analyses it. Headers can carry a sample label and an abundance (`>hap1 sample=S01 count=37`), so a quasispecies can be described per sample.
+
+### Quick start
+
+```bash
+# simulate a dataset with planted truth, build the graph, and benchmark
+python seqgraph.py demo --out seqgraph_demo/demo
+
+# analyse your own alignment
+python seqgraph.py build aln.fasta --out run/x --genes genes.tsv --meta meta.tsv
+
+# check that the GFA spells every input sequence
+python seqgraph.py check run/x.gfa aln.fasta
+
+# run the unit tests
+python seqgraph.py test
+```
+
+### Inputs
+
+* Aligned FASTA with equal-length records. The first record is the reference unless `--ref` is given.
+* Optional genes TSV with `gene`, `start`, and `end` in reference coordinates.
+* Optional metadata TSV with `sample` as the first column. Numeric columns are analysed.
+
+### Outputs
+
+* `.gfa`: the graph in GFA 1.0, with one path per input haplotype
+* `.bubbles.tsv`: variant sites with alleles, entropy, gene, and codon impact
+* `.samples.tsv`: per-sample haplotype entropy and diversity
+* `.assoc.tsv`: rank correlations with metadata, with Benjamini–Hochberg q-values
+* `.html`: an interactive viewer with the graph, a site-entropy track, and a gene track
+
+### Status and limitations
+
+* On the simulated demo data it recovers all 6 planted mutational hotspots and ranks the planted SNP-metadata association second of 83 allele tests. It has not yet been run on real data.
+* Compatibility of the exported GFA with vg and odgi has not been tested yet.
+* Variants in the first or last alignment column are not reported.
+* Metadata analysis uses numeric columns only.
+* It is pure Python and suits alignments of up to a few thousand columns and haplotypes.
 
 ## 🧪 Example Use Cases
 
@@ -216,6 +277,7 @@ graph TD
 * Integrate heterogeneous omics datasets for pathway-level and systems biology interpretation
 * Develop and prototype scalable computational workflows prior to HPC or cloud-scale deployment
 * Apply machine learning approaches to biological sequence classification and predictive modelling tasks
+* Represent a viral quasispecies as a variation graph and relate its variant sites to gene annotations and sample metadata
 
 ---
 
@@ -248,6 +310,9 @@ pip install netzoopy pyarrow
 # Pangenome Construction
 git clone https://github.com/lh3/minigraph
 cd minigraph && make
+
+# Variation graphs (seqgraph.py): standard library only, Python 3.9+
+python seqgraph.py test
 ```
 
 ## Design Principles
