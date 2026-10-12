@@ -11,7 +11,7 @@
 
 This repository documents an independently developed computational biology and evolutionary genomics framework built alongside formal training in Genomic Science. The project integrates modular analytical tools, scalable workflows, and systems-level inference approaches spanning comparative genomics, transcriptomics, metagenomics, regulatory network biology, microbial evolution, and machine learning.
 
-The repository began with foundational sequence-analysis utilities and progressively expanded into large-scale computational workflows for comparative and evolutionary genomics, genome architecture analysis, transcriptomics, single-cell analysis, and patient-specific regulatory network inference. Current work includes archaeal genome organisation analysis, comparative genome reduction modelling, metagenomic profiling, and gene regulatory network reconstruction using PANDA and LIONESS on TCGA ovarian cancer datasets. Recent additions include `seqgraph.py`, a single-file tool that represents a viral population as a variation graph and links its variant sites to gene annotations and sample metadata.
+The repository began with foundational sequence-analysis utilities and progressively expanded into large-scale computational workflows for comparative and evolutionary genomics, genome architecture analysis, transcriptomics, single-cell analysis, and patient-specific regulatory network inference. The toolkit includes archaeal genome organisation analysis, comparative genome reduction modelling, metagenomic profiling, and gene regulatory network reconstruction using PANDA and LIONESS on TCGA ovarian cancer datasets. Recent additions include `seqgraph.py`, a single-file tool that represents a viral population as a variation graph and links its variant sites to gene annotations and sample metadata.
 
 Rather than functioning as isolated scripts, the modules are designed as interoperable components for reproducible biological inference across heterogeneous datasets and biological scales — from nucleotide-level sequence analysis through to systems-level modelling of cellular regulation and evolutionary processes.
 
@@ -263,8 +263,9 @@ python seqgraph.py test
 * Variants in the first or last alignment column are not reported.
 * Metadata analysis uses numeric columns only.
 * It is pure Python and suits alignments of up to a few thousand columns and haplotypes.
+---
 
-## 🧪 Example Use Cases
+## 🧪 Example Use Cases Of The Toolkit
 
 * Analyse genome architecture, replication symmetry, and compositional bias across archaeal, bacterial, and eukaryotic genomes
 * Perform comparative genomics and genome reduction analyses in microbial and symbiotic systems
