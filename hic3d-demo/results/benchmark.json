@@ -1,0 +1,21 @@
+{
+  "random_breakpoints": {
+    "tad_f1": 0.9418936253075877,
+    "compartment_accuracy": 0.9564166666666667,
+    "reconstruction_spearman": 0.8821746399421032,
+    "breakpoint_precision": 0.4407045038295038,
+    "breakpoint_recall": 0.5650000000000001,
+    "enrichment_median_p": 0.4550224887556222,
+    "enrichment_frac_p_lt_0_05": 0.0
+  },
+  "snap_to_tad": {
+    "tad_f1": 0.9418936253075877,
+    "compartment_accuracy": 0.9564166666666667,
+    "reconstruction_spearman": 0.8821746399421032,
+    "breakpoint_precision": 0.4513121151724094,
+    "breakpoint_recall": 0.5233333333333333,
+    "enrichment_median_p": 0.0004997501249375312,
+    "enrichment_frac_p_lt_0_05": 1.0
+  },
+  "n_seeds": 20
+}

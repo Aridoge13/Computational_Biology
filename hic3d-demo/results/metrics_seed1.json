@@ -1,0 +1,30 @@
+{
+  "seed": 1,
+  "snap": false,
+  "tad": {
+    "precision": 0.9411764705882353,
+    "recall": 0.8421052631578947,
+    "f1": 0.8888888888888888,
+    "n_called": 17,
+    "n_true": 19
+  },
+  "compartment_accuracy": 0.9116666666666666,
+  "reconstruction": {
+    "spearman": 0.8626993534068843,
+    "procrustes_disparity": 0.3133096700424206,
+    "null_disparity_mean": 0.9966874326598318
+  },
+  "breakpoints": {
+    "precision": 0.5,
+    "recall": 0.5,
+    "f1": 0.5,
+    "n_called": 10,
+    "n_true": 10
+  },
+  "enrichment": {
+    "observed": 3,
+    "n_breakpoints": 10,
+    "null_mean": 1.9928,
+    "p_value": 0.3209358128374325
+  }
+}

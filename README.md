@@ -1,329 +1,195 @@
-# 🧬 Computational Biology Toolkit for Genomic Analysis
+# Computational Biology
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](License.md)
 ![Python](https://img.shields.io/badge/python-3.9%2B-blue)
-![GitHub issues](https://img.shields.io/github/issues/Aridoge13/Computational_Biology)
 ![GitHub last commit](https://img.shields.io/github/last-commit/Aridoge13/Computational_Biology)
 
-![alt text](logo/Toolkit.png)
+A collection of Python scripts and notebooks for evolutionary and comparative genomics, written alongside my MSc in Genomic Science and since extended through self-directed projects. The work centres on how genome organisation relates to genome evolution, from sequence composition and replication-associated structure to 3D chromosome folding. It also covers transcriptomics, metagenomics, regulatory network inference and a few machine-learning exercises.
 
-## 📘 Overview
+Most scripts are standalone and take their inputs from the command line or from a configuration block at the top of the file. They are not a packaged library. Several were developed on small example data (see `resources/`), and each status entry below says how far a tool has been tested.
 
-This repository documents an independently developed computational biology and evolutionary genomics framework built alongside formal training in Genomic Science. The project integrates modular analytical tools, scalable workflows, and systems-level inference approaches spanning comparative genomics, transcriptomics, metagenomics, regulatory network biology, microbial evolution, and machine learning.
-
-The repository began with foundational sequence-analysis utilities and progressively expanded into large-scale computational workflows for comparative and evolutionary genomics, genome architecture analysis, transcriptomics, single-cell analysis, and patient-specific regulatory network inference. The toolkit includes archaeal genome organisation analysis, comparative genome reduction modelling, metagenomic profiling, and gene regulatory network reconstruction using PANDA and LIONESS on TCGA ovarian cancer datasets. Recent additions include `seqgraph.py`, a single-file tool that represents a viral population as a variation graph and links its variant sites to gene annotations and sample metadata.
-
-Rather than functioning as isolated scripts, the modules are designed as interoperable components for reproducible biological inference across heterogeneous datasets and biological scales — from nucleotide-level sequence analysis through to systems-level modelling of cellular regulation and evolutionary processes.
-
-The repository emphasizes:
-
-* reproducible computational biology,
-* modular workflow design,
-* scalable genomics analysis,
-* evolutionary and systems-level interpretation,
-* compatibility with HPC and cloud-native environments including GCP.
+![Toolkit overview](logo/Toolkit.png)
 
 ---
 
-## 🌟 Key Features
+## Featured Project: `hic3d-demo`
 
-* Modular computational biology toolkit spanning genomics, transcriptomics, metagenomics, and systems biology
-* Support for standard biological data formats (FASTA, FASTQ, BAM, VCF, GTF/GFF, expression matrices)
-* Reproducible workflow-oriented design compatible with HPC and cloud environments
-* Lightweight analytical implementations for rapid prototyping and exploratory research
-* Comparative and evolutionary genomics utilities for microbial and eukaryotic systems
-* Integrated support for statistical analysis, visualisation, and biological interpretation
-* Applicable across microbial, plant, animal, and human genomics datasets
-* Graph-based analysis of viral populations, from alignment to variation graph, variant sites, and GFA export
+[`hic3d-demo/`](hic3d-demo) is a computational framework for simulating 3D genome organisation, generating synthetic Hi-C contact maps, and evaluating computational methods for chromatin architecture analysis against known ground truth.
 
----
+### Implemented Capabilities
 
-## 🔬 Functional Areas
+- **Genome simulation:** Generates synthetic genomes comprising 600 genomic bins, with configurable TADs, A/B compartments, inversions and segment swaps.
+- **TAD boundary detection:** Identifies chromatin domain boundaries using insulation-score analysis.
+- **Compartment identification:** Detects A/B compartments using PC1 derived from the observed/expected contact correlation matrix.
+- **Rearrangement detection:** Identifies candidate chromosomal rearrangement breakpoints through change-point analysis of long-range contact profiles.
+- **3D genome reconstruction:** Reconstructs spatial genome organisation from shortest-path contact-derived distances using classical multidimensional scaling (MDS), following the general approach of ShRec3D.
+- **Breakpoint enrichment analysis:** Uses permutation testing to evaluate the spatial association between chromosomal rearrangement breakpoints and TAD boundaries. The analysis can also be applied to user-supplied breakpoint and boundary coordinates.
 
-### 🧬 Sequence Analysis & Genome Architecture
+### Benchmarking Results
 
-* GC content and cumulative GC skew analysis
-* Codon usage profiling and compositional analysis
-* DNA translation and protein sequence analysis
-* Protein motif detection and amino acid property analysis
-* Promoter and regulatory motif scanning
-* Pairwise alignment scoring (Needleman–Wunsch / Smith–Waterman)
+Performance was evaluated across 20 independently simulated genomes.
 
-### 🌍 Comparative & Evolutionary Genomics
+| Analysis | Evaluation Metric | Result |
+|---|---|---:|
+| TAD boundary detection | F1-score (2-bin tolerance) | 0.94 |
+| A/B compartment identification | Accuracy | 0.96 |
+| 3D genome reconstruction | Spearman correlation of true and reconstructed distances | 0.88 |
+| Rearrangement breakpoint detection | Precision (3-bin tolerance) | 0.44 |
+| Rearrangement breakpoint detection | Recall (3-bin tolerance) | 0.57 |
+| Enrichment test with random breakpoints | Median p-value; significant simulations | 0.46; 0/20 |
+| Enrichment test with boundary-associated breakpoints | Median p-value; significant simulations | 0.0005; 20/20 |
 
-* Comparative genome analysis and mutation annotation
-* Genome reduction and streamlining inference
-* Phylogenetic tree construction and evolutionary distance analysis
-* Population structure and divergence analysis
-* Comparative microbial and archaeal genomics workflows
-* Replication-associated genome organisation analysis
+### Scope and Limitations
 
-### 🧪 Transcriptomics & Regulatory Systems Biology
+All benchmark data are synthetically generated. The framework provides a controlled environment for evaluating chromatin architecture analyses, 3D reconstruction and breakpoint-enrichment methods against known genomic structures. Its results should not be interpreted as evidence of performance on experimental Hi-C datasets or biological genomes.
 
-* Bulk RNA-seq analysis and expression visualisation
-* Single-cell RNA-seq workflows
-* Differential expression and pathway enrichment analysis
-* Gene regulatory network inference using PANDA and LIONESS
-* Patient-specific network modelling on TCGA datasets
-* Pathway interaction and systems-level crosstalk analysis
+In particular, breakpoint detection from contact profiles remains challenging when rearrangement junctions resemble chromatin domain boundaries. Further methodological details and limitations are documented in [`hic3d-demo/README.md`](hic3d-demo/README.md).
 
-### 🌐 Metagenomics & Multi-Omics Integration
+### Running the Workflow
 
-* Taxonomic and functional metagenomic profiling
-* Community-level sequence analysis
-* Multi-omics data integration
-* Functional interpretation of heterogeneous biological datasets
+```bash
+cd hic3d-demo
 
-### 🕸️ Graph-Based Analysis of Viral Populations
+pip install -r requirements.txt
 
-* Variation graph construction from a multiple sequence alignment of viral haplotypes
-* Bubble detection to identify variant sites, with allele frequencies and entropy per site
-* Heaviest path (consensus), k-best paths, and counts of the haplotype space the graph allows
-* Mutational hotspot windows and codon-level impact of SNPs in annotated genes
-* Sample-level diversity and rank correlation of allele frequencies with numeric metadata
-* GFA 1.0 export and an interactive HTML viewer
+python hic3d_demo.py run --seed 1 --outdir results
 
-### 🤖 Machine Learning & Predictive Modelling
-
-* Multi-label classification of antimicrobial proteins
-* Predictive modelling workflows for biological datasets
-* Feature engineering for high-dimensional omics data
-* Exploratory machine learning integration for systems biology applications
-
----
-
-## ⚙️ Infrastructure & Reproducibility
-
-The repository is designed around reproducible and scalable computational research practices:
-
-* Python-based modular architecture
-* Workflow compatibility with Snakemake and HPC systems
-* Cloud-compatible execution (including GCP)
-* Git-based version control and reproducible analysis tracking
-* Notebook-driven exploratory analysis and visualisation workflows
-
-The long-term direction of the project is the development of scalable computational frameworks for comparative genomics, systems biology, and evolutionary inference across complex biological datasets.
-
----
-
-## ⚙️ Workflow Integration
-
-Tools can operate independently or as components of a complete analysis pipeline.
-
-```mermaid
-graph TD
-
-  A["Raw Biological Data<br/>FASTA · FASTQ · BAM · VCF · GTF · scRNA · MAGs"] 
-
-  --> B["Preprocessing & Quality Control<br/>Filtering · Trimming · Normalisation · Feature Extraction"]
-
-  %% =====================================================
-  %% CORE ANALYTICAL MODULES
-  %% =====================================================
-
-  B --> C["Sequence & Genome Architecture Analysis<br/>GC Content · GC Skew · Codon Usage · Motif Analysis · Protein Properties"]
-
-  B --> D["Comparative & Evolutionary Genomics<br/>Genome Reduction · Variant Annotation · Mutation Analysis · Comparative Genomics"]
-
-  B --> E["Phylogenetics & Evolutionary Inference<br/>Sequence Alignment · Distance Trees · Population Structure · Phylogenomics"]
-
-  B --> F["Transcriptomics & Regulatory Systems Biology<br/>RNA-seq · scRNA-seq · PANDA · LIONESS · Gene Regulatory Networks"]
-
-  B --> G["Metagenomics & Microbial Community Analysis<br/>Taxonomic Profiling · Community Composition · Functional Profiling"]
-
-  B --> H["Machine Learning & Predictive Modelling<br/>AMP Classification · Multi-label Learning · Systems-Level Prediction"]
-  B --> K["Variation Graph Analysis of Viral Populations<br/>Alignment to Graph · Bubbles · Haplotype Paths · GFA · Metadata Association"]
-
-  K --> I
-
-  
-
-  %% =====================================================
-  %% INTEGRATION LAYER
-  %% =====================================================
-
-  C --> I["Integrated Biological Interpretation<br/>Multi-Omics Integration · Evolutionary Modelling · Pathway Crosstalk · Systems Biology"]
-
-  D --> I
-  E --> I
-  F --> I
-  G --> I
-  H --> I
-
-  %% =====================================================
-  %% OUTPUT
-  %% =====================================================
-
-  I --> J["Visualisation, Reproducibility & Deployment<br/>Publication Figures · Jupyter Notebooks · Snakemake · GitHub · HPC/GCP"]
-
-  %% =====================================================
-  %% COLOR CLASSES
-  %% =====================================================
-
-  classDef raw fill:#1565c0,stroke:#0d47a1,color:#fff
-  classDef qc fill:#2e7d32,stroke:#1b5e20,color:#fff
-
-  classDef seq fill:#43a047,stroke:#1b5e20,color:#fff
-  classDef evo fill:#00897b,stroke:#004d40,color:#fff
-  classDef phylo fill:#00acc1,stroke:#006064,color:#fff
-
-  classDef reg fill:#6a1b9a,stroke:#4a148c,color:#fff
-  classDef meta fill:#ef6c00,stroke:#e65100,color:#fff
-  classDef ml fill:#c62828,stroke:#8e0000,color:#fff
-
-  classDef vgraph fill:#5d4037,stroke:#3e2723,color:#fff
-
-  classDef integrate fill:#3949ab,stroke:#1a237e,color:#fff
-  classDef output fill:#d81b60,stroke:#880e4f,color:#fff
-
-  %% =====================================================
-  %% APPLY CLASSES
-  %% =====================================================
-
-  class A raw
-  class B qc
-
-  class C seq
-  class D evo
-  class E phylo
-  class F reg
-  class G meta
-  class H ml
-
-  class I integrate
-  class J output
-  class K vgraph
+python -m pytest -q tests
 ```
 
-
-## 📂 Available Scripts
-
-| Script | Function | Current Status |
-|--------|----------|----------------|
-| `codon_analysis.py` | Codon usage analysis | Completed|
-| `dna-protein.py` | Six-frame DNA translation | Completed|
-| `gc_skew_calc.py` | Archaeal GC Skew Analysis | Completed|
-| `gc_calc_pwa.py` | Comparative GC analysis | Completed |
-| `phylogenetic_analysis.py` | Distance-based tree construction | Completed |
-| `promoter_id.py` | Promoter/motif scanning | Completed |
-| `protein_property.py` | Amino acid property analysis | Completed |
-| `protein_seq_motif.py` | Protein motif detection | Completed |
-| `rna_analysis.py` | RNA-seq processing and visualization | Completed |
-| `seq_align_score_calc.py` | Alignment scoring (Needleman–Wunsch / Smith–Waterman) | Completed |
-| `variant_annotation.py` | Variant functional annotation | Completed |
-| `metagenomic.py` | Metagenomic profiling | Completed |
-|`mutation_annotation.py`| Annotation of mutations | Completed |
-| `adhesion_metabolism_crosstalk.py` | Pathway interaction analysis | Completed |
-| `somatic_variation.py` | Comparative genome analysis | Completed |
-| `gen_red_inf.py` | Comparative Genome Reduction Pipeline | Completed |
-| `scrna.ipynb` | Single-cell RNA seq data analysis | Completed |
-|`panda_lioness.ipynb`|Gene Regulatory Network analysis| Currently being run on the GCP platform.|
-|`ampml.ipynb`|Multi-label classification of antimicrobial proteins| Complete |
-| `seqgraph.py` | Variation graph construction and analysis for viral populations | Prototype, tested on simulated data |
 ---
 
-## 🕸️ seqgraph: Variation Graphs for Viral Populations
+## Repository layout
 
-`seqgraph.py` is a single Python file with no third-party dependencies. It turns an alignment of viral haplotypes into a variation graph and analyses it. Headers can carry a sample label and an abundance (`>hap1 sample=S01 count=37`), so a quasispecies can be described per sample.
+```
+Computational_Biology/
+├── hic3d-demo/        Hi-C simulation and 3D reconstruction (own README, tests, results)
+├── src/               Analysis scripts and notebooks
+├── Conservation/      Structural variant, genetic load and pangenome scripts
+├── resources/         Small example inputs (FASTA, expression tables, a RAxML tree)
+├── logo/
+├── requirements.txt
+└── License.md
+```
 
-### Quick start
+---
+
+## Tools in `src/`
+
+### Sequence analysis and genome organisation
+
+| Script | Function | Status |
+|---|---|---|
+| `codon_analysis.py` | Codon usage profiling | Complete |
+| `dna-protein.py` | Six-frame DNA translation | Complete |
+| `gc_skew_calc.py` | Cumulative GC skew for archaeal genomes | Complete |
+| `gc_calc_pwa.py` | Comparative GC analysis | Complete |
+| `promoter_id.py` | Promoter and motif scanning | Complete |
+| `protein_property.py` | Amino acid property analysis | Complete |
+| `protein_seq_motif.py` | Protein motif detection | Complete |
+| `seq_align_score_calc.py` | Needleman-Wunsch and Smith-Waterman alignment scoring | Complete |
+
+### Comparative and evolutionary genomics
+
+| Script | Function | Status |
+|---|---|---|
+| `phylogenetic_analysis.py` | Distance-based tree construction | Complete |
+| `gen_red_inf.py` | Genome reduction analysis across Asgard, DPANN and other archaeal genomes (coding density, ATP synthase genes, composition, PCA) | Under revision: the bundled `resources/genome_reduction_results.csv` contains implausible genome sizes and gene counts and must be regenerated before use |
+| `variant_annotation.py` | Variant functional annotation | Complete |
+| `mutation_anotation.py` | Mutation annotation | Complete |
+| `somatic_variation.py` | Comparative genome analysis | Complete |
+
+### Transcriptomics and regulatory networks
+
+| Script | Function | Status |
+|---|---|---|
+| `rna_analysis.py` | Bulk RNA-seq processing and visualisation | Complete |
+| `scrna.ipynb` | Single-cell RNA-seq analysis | Complete |
+| `panda_lioness.ipynb` | PANDA and LIONESS network inference on TCGA ovarian cancer data | In progress |
+| `adhesion_metabolism_crosstalk.py` | Pathway interaction analysis | Complete |
+
+### Metagenomics and machine learning
+
+| Script | Function | Status |
+|---|---|---|
+| `metagenomic.py` | Taxonomic and functional profiling | Complete |
+| `ampml.ipynb` | Multi-label classification of antimicrobial proteins | Complete |
+
+### Viral population graphs
+
+| Script | Function | Status |
+|---|---|---|
+| `seqgraph.py` | Variation graph construction and analysis | Prototype, tested on simulated data |
+
+## Tools in `Conservation/`
+
+| Script | Function | Status |
+|---|---|---|
+| `sv_annotation.py` | Structural variant calling with Sniffles and annotation | Needs a BAM file as input |
+| `genetic_load.py` | Genetic load metrics from a variant table | Needs a tab-separated variant table |
+| `pangenome_assembly.py` | Pangenome construction with minigraph | Assembly paths are set in the configuration block at the top of the file |
+
+---
+
+## seqgraph: variation graphs for viral populations
+
+`src/seqgraph.py` is a single Python file with no third-party dependencies. It turns an alignment of viral haplotypes into a variation graph and analyses it. FASTA headers can carry a sample label and an abundance (`>hap1 sample=S01 count=37`), so a quasispecies can be described per sample.
 
 ```bash
 # simulate a dataset with planted truth, build the graph, and benchmark
-python seqgraph.py demo --out seqgraph_demo/demo
+python src/seqgraph.py demo --out seqgraph_demo/demo
 
 # analyse your own alignment
-python seqgraph.py build aln.fasta --out run/x --genes genes.tsv --meta meta.tsv
+python src/seqgraph.py build aln.fasta --out run/x --genes genes.tsv --meta meta.tsv
 
 # check that the GFA spells every input sequence
-python seqgraph.py check run/x.gfa aln.fasta
+python src/seqgraph.py check run/x.gfa aln.fasta
 
 # run the unit tests
-python seqgraph.py test
+python src/seqgraph.py test
 ```
 
-### Inputs
+Inputs are an aligned FASTA with equal-length records (the first record is the reference unless `--ref` is given), an optional genes table with `gene`, `start` and `end` in reference coordinates, and an optional metadata table whose first column is `sample`. Numeric metadata columns are analysed.
 
-* Aligned FASTA with equal-length records. The first record is the reference unless `--ref` is given.
-* Optional genes TSV with `gene`, `start`, and `end` in reference coordinates.
-* Optional metadata TSV with `sample` as the first column. Numeric columns are analysed.
-
-### Outputs
+Outputs:
 
 * `.gfa`: the graph in GFA 1.0, with one path per input haplotype
-* `.bubbles.tsv`: variant sites with alleles, entropy, gene, and codon impact
+* `.bubbles.tsv`: variant sites with alleles, entropy, gene and codon impact
 * `.samples.tsv`: per-sample haplotype entropy and diversity
-* `.assoc.tsv`: rank correlations with metadata, with Benjamini–Hochberg q-values
-* `.html`: an interactive viewer with the graph, a site-entropy track, and a gene track
+* `.assoc.tsv`: rank correlations with metadata, with Benjamini-Hochberg q-values
+* `.html`: an interactive viewer with the graph, a site-entropy track and a gene track
 
-### Status and limitations
+Status and limitations:
 
 * On the simulated demo data it recovers all 6 planted mutational hotspots and ranks the planted SNP-metadata association second of 83 allele tests. It has not yet been run on real data.
-* Compatibility of the exported GFA with vg and odgi has not been tested yet.
+* Compatibility of the exported GFA with vg and odgi has not been tested.
 * Variants in the first or last alignment column are not reported.
-* Metadata analysis uses numeric columns only.
 * It is pure Python and suits alignments of up to a few thousand columns and haplotypes.
----
-
-## 🧪 Example Use Cases Of The Toolkit
-
-* Analyse genome architecture, replication symmetry, and compositional bias across archaeal, bacterial, and eukaryotic genomes
-* Perform comparative genomics and genome reduction analyses in microbial and symbiotic systems
-* Construct phylogenetic relationships and investigate evolutionary divergence across populations or species
-* Detect regulatory motifs, promoter regions, and protein sequence signatures associated with functional adaptation
-* Annotate genomic variants and evaluate potential functional or evolutionary consequences
-* Process and visualise bulk RNA-seq and single-cell transcriptomic datasets
-* Infer patient-specific gene regulatory networks using PANDA and LIONESS frameworks
-* Profile microbial community composition and functional potential from metagenomic sequencing data
-* Integrate heterogeneous omics datasets for pathway-level and systems biology interpretation
-* Develop and prototype scalable computational workflows prior to HPC or cloud-scale deployment
-* Apply machine learning approaches to biological sequence classification and predictive modelling tasks
-* Represent a viral quasispecies as a variation graph and relate its variant sites to gene annotations and sample metadata
 
 ---
 
-## ⚙️ Installation
-
-### Requirements
-
-- Python 3.7+
-- Biopython
-- Standard scientific Python stack (NumPy, Pandas, Matplotlib)
-
-### Setup
+## Installation
 
 ```bash
 git clone https://github.com/Aridoge13/Computational_Biology.git
 cd Computational_Biology
-
-pip install biopython matplotlib seaborn pandas numpy pysam 'scanpy[leiden]'
+pip install biopython matplotlib seaborn pandas numpy scipy scikit-learn pysam adjustText 'scanpy[leiden]'
 ```
-#the extra [leiden] installs two packages that are needed for popular parts of scanpy but aren’t requirements: `igraph` [Csárdi and Nepusz, 2006] and `leiden` [Traag et al., 2019]
 
-### Tools for Specific Modules
+The `[leiden]` extra installs `igraph` and `leiden`, which scanpy needs for clustering. Some modules need extra tools:
+
 ```bash
-#structural variant analysis
-pip install sniffles
-
-#Gene Regulatory Network Analysis
-pip install netzoopy pyarrow
-
-# Pangenome Construction
-git clone https://github.com/lh3/minigraph
-cd minigraph && make
-
-# Variation graphs (seqgraph.py): standard library only, Python 3.9+
-python seqgraph.py test
+pip install sniffles               # structural variant calling (Conservation/sv_annotation.py)
+pip install netzoopy pyarrow       # PANDA and LIONESS (src/panda_lioness.ipynb)
+git clone https://github.com/lh3/minigraph && cd minigraph && make   # pangenome construction
 ```
 
-## Design Principles
-- Modularity: Components can be reused in custom workflows
-- Reproducibility: Deterministic outputs with documented dependencies
-- Clarity: Readable implementations suitable for learning and extension
-- Scalability: Applicable from small datasets to HPC environments
+`seqgraph.py` and `hic3d-demo` have their own requirements (the standard library for the first; NumPy, SciPy and Matplotlib for the second). The top-level `requirements.txt` is a full environment snapshot, not a minimal dependency list.
 
-## Contribution
-Issues, feature requests, and pull requests are welcome.
+Scripts that query NCBI through Biopython (for example `gen_red_inf.py`) read the contact address from `Entrez.email` near the top of the file. Set it to your own address before running.
 
-## License
-Distributed under the [MIT License](License.md)
+---
+
+## Contributing and licence
+
+Issues and pull requests are welcome. The code is distributed under the [MIT License](License.md).
