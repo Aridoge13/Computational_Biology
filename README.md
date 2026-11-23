@@ -21,7 +21,6 @@ Every tool reads standard bioinformatics formats and runs on its own. Some tools
 * [Available scripts](#available-scripts)
 * [Population and conservation genomics](#population-and-conservation-genomics)
 * [seqgraph: variation graphs for viral populations](#seqgraph-variation-graphs-for-viral-populations)
-* [hic3d-demo: a simulated Hi-C benchmark](#hic3d-demo-a-simulated-hi-c-benchmark)
 * [Installation](#installation)
 
 ---
